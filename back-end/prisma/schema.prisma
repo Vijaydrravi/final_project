@@ -1,0 +1,95 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+// Prisma schema with auto-incrementing integer primary keys
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL") // Replace with your database URL
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id                 Int                   @id @default(autoincrement())
+  email              String                @unique
+  password           String
+  designation        String?
+  name               String                // Add name field here
+  courseAssignments  CourseAssignment[]    // Relation to course assignments
+  performanceRatings PerformanceRating[]   // Relation to performance ratings
+  performanceSummary PerformanceSummary?   // Summary performance per employee
+  certificates       Certificates[]        // Relation to certificates
+}
+
+
+model Course {
+  id                 Int                  @id @default(autoincrement())
+  title              String
+  duration           Int
+  difficulty_level   String
+  courseAssignments  CourseAssignment[]
+  learningPaths      CourseLearningPath[]  // Many-to-many relationship with Learning Paths
+}
+
+model CourseAssignment {
+  id             Int                  @id @default(autoincrement())
+  user_id        Int
+  course_id      Int
+  user           User                 @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  course         Course               @relation(fields: [course_id], references: [id], onDelete: Cascade)
+  progress       Int                  // Percentage of course completed
+  assignment_date DateTime            @default(now())
+  performance    PerformanceRating?   // Performance of the user in this course
+  certificates   Certificates[]       // Relation to certificates for the course
+}
+
+model PerformanceRating {
+  id             Int              @id @default(autoincrement())
+  rating         Int
+  user_id        Int              // Reference to the user
+  assignment_id  Int              @unique
+  courseAssignment CourseAssignment @relation(fields: [assignment_id], references: [id], onDelete: Cascade)
+  user           User             @relation(fields: [user_id], references: [id], onDelete: Cascade) // Fixed the missing user_id field
+}
+
+model PerformanceSummary {
+  id              Int           @id @default(autoincrement())
+  user_id         Int           @unique
+  average_rating  Float
+  user            User          @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  learning_path_id Int           // Link to learning path
+  learningPath    LearningPath  @relation(fields: [learning_path_id], references: [id], onDelete: Cascade)
+}
+
+model Certificates {
+  id             Int             @id @default(autoincrement())
+  is_certified   Boolean
+  assignment_id  Int             @unique
+  courseAssignment CourseAssignment @relation(fields: [assignment_id], references: [id], onDelete: Cascade)
+  user_id        Int
+  user           User            @relation(fields: [user_id], references: [id], onDelete: Cascade)
+}
+
+model LearningPath {
+  id          Int                  @id @default(autoincrement())
+  title       String
+  description String?
+  created_at  DateTime              @default(now())
+  courses     CourseLearningPath[]  // Many-to-many relationship with courses
+  performanceSummaries PerformanceSummary[] // Relation to performance summaries
+}
+
+model CourseLearningPath {
+  id                Int     @id @default(autoincrement())
+  course_id         Int
+  learning_path_id  Int
+  course            Course   @relation(fields: [course_id], references: [id], onDelete: Cascade)
+  learningPath      LearningPath @relation(fields: [learning_path_id], references: [id], onDelete: Cascade)
+
+  @@unique([course_id, learning_path_id]) // Ensure unique pairings
+}
