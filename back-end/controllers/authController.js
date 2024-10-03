@@ -15,11 +15,12 @@ const signup = async (req, res) => {
         email,
         password: hashedPassword,
         designation,
-        name
-      }
+        name,
+      },
     });
     res.status(201).json({ message: 'User created successfully' });
   } catch (error) {
+    console.error(error); // Log the error for debugging
     res.status(500).json({ error: 'User creation failed' });
   }
 };
@@ -30,17 +31,24 @@ const login = async (req, res) => {
 
   try {
     const user = await prisma.user.findUnique({
-      where: { email }
+      where: { email },
     });
 
-    if (user && await bcrypt.compare(password, user.password)) {
-      const token = jwt.sign({ userId: user.id }, 'your-jwt-secret', { expiresIn: '1h' });
+    if (user && (await bcrypt.compare(password, user.password))) {
+      const token = jwt.sign(
+        { userId: user.id, role: user.role },
+        'your-jwt-secret',
+        { expiresIn: '1h' }
+      );
       req.session.userId = user.id; // Store user ID in session
-      return res.json({ token });
+
+      // Send token, role, and userId back in the response
+      return res.json({ token, role: user.role, userId: user.id });
     }
 
     res.status(401).json({ error: 'Invalid email or password' });
   } catch (error) {
+    console.error(error); // Log the error for debugging
     res.status(500).json({ error: 'Login failed' });
   }
 };
@@ -55,7 +63,7 @@ const dashboard = (req, res) => {
 
 // Logout handler
 const logout = (req, res) => {
-  req.session.destroy(err => {
+  req.session.destroy((err) => {
     if (err) {
       return res.status(500).json({ error: 'Failed to log out' });
     }
@@ -67,5 +75,5 @@ module.exports = {
   signup,
   login,
   dashboard,
-  logout
+  logout,
 };

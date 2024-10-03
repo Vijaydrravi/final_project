@@ -1,21 +1,29 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { AuthProvider, useAuth } from './components/pages/AuthContext'; // Adjust the path if necessary
-import Login from './components/pages/Login'; // Adjust the path if necessary
-import SignUp from './components/pages/SignUp'; // Import the Signup component
-import HomePage from './components/Admin/HomePage'; // Adjust the path if necessary
-import AddCourse from './components/Admin/AddCourse'; // Import the Add Course component
-import AssignCourse from './components/Admin/AssignCourse'; // Import the Assign Course component
-import AddLearningPath from './components/Admin/AddLearningPath'; // Import the Add Learning Path component
-import ViewCourses from './components/Admin/ViewCourses';
+import { AuthProvider, useAuth } from './components/pages/AuthContext';
+import Login from './components/pages/Login';
+import SignUp from './components/pages/SignUp';
+import HomePage from './components/Admin/HomePage';
+import NewHomePage from './components/pages/NewHomePage'; // Import Employee Home Page
+import AddCourse from './components/Admin/AddCourse';
+import AssignCourse from './components/admin/AssignCourse';
+import AddLearningPath from './components/Admin/AddLearningPath';
+import ViewCourses from './components/admin/ViewCourses';
+import EnrolledCourses from './components/pages/EnrolledCourses'; // Import Enrolled Courses component
+
 const ProtectedRoute = ({ children }) => {
   const { token } = useAuth();
   return token ? children : <Navigate to="/login" />;
 };
 
-const PublicRoute = ({ children }) => {
+const RoleBasedRoute = ({ children }) => {
   const { token } = useAuth();
-  return token ? <Navigate to="/dashboard" /> : children;
+  const role = localStorage.getItem('role'); // Get the role from localStorage
+
+  if (!token) return <Navigate to="/login" />;
+
+  // Render different homepages based on the role
+  return role === 'admin' ? children : <Navigate to="/employee-home" />;
 };
 
 const App = () => {
@@ -23,27 +31,31 @@ const App = () => {
     <AuthProvider>
       <Router>
         <Routes>
-          <Route path="/login" element={
-            <PublicRoute>
-              <Login />
-            </PublicRoute>
-          } />
-          <Route path="/signup" element={
-            <PublicRoute>
-              <SignUp />
-            </PublicRoute>
-          } />
-          <Route path="/dashboard" element={
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+
+          {/* Employee Routes */}
+          <Route path="/employee-home" element={
             <ProtectedRoute>
-              <HomePage />
+              <NewHomePage />
             </ProtectedRoute>
           }>
-            {/* Nested routes under the HomePage */}
+            <Route path="enrolled-courses" element={<EnrolledCourses />} />
+          </Route>
+
+          {/* Admin Routes */}
+          <Route path="/dashboard" element={
+            <RoleBasedRoute>
+              <HomePage />
+            </RoleBasedRoute>
+          }>
             <Route path="add-course" element={<AddCourse />} />
             <Route path="assign-course" element={<AssignCourse />} />
             <Route path="add-learning-path" element={<AddLearningPath />} />
-            <Route path="view-courses" element={<ViewCourses />}/>
+            <Route path="view-courses" element={<ViewCourses />} />
           </Route>
+
+          {/* Redirect all other paths to login */}
           <Route path="*" element={<Navigate to="/login" />} />
         </Routes>
       </Router>

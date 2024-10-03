@@ -12,23 +12,23 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     try {
       const response = await fetch('http://localhost:5000/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
       });
-
+  
       const data = await response.json();
-
+  
       if (response.ok) {
-        // Call login from AuthContext
-        login(data.token);
-        
+        // Call login from AuthContext with token, role, and userId
+        login(data.token, data.role, data.userId); // Updated to include userId
+  
         // Success toast
         toast.success('Login successful! Redirecting to dashboard...');
-        
+  
         // Redirect to the dashboard after a short delay
         setTimeout(() => {
           navigate('/dashboard');

@@ -28,14 +28,14 @@ model User {
 }
 
 
-model Course {
-  id                 Int                  @id @default(autoincrement())
-  title              String
-  duration           Int
-  difficulty_level   String
-  courseAssignments  CourseAssignment[]
-  learningPaths      CourseLearningPath[]  // Many-to-many relationship with Learning Paths
-}
+  model Course {
+    id                 Int                  @id @default(autoincrement())
+    title              String               @unique
+    duration           Int
+    difficulty_level   String
+    courseAssignments  CourseAssignment[]
+    learningPaths      CourseLearningPath[]  // Many-to-many relationship with Learning Paths
+  }
 
 model CourseAssignment {
   id             Int                  @id @default(autoincrement())

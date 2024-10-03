@@ -1,13 +1,16 @@
 const express = require('express');
 const session = require('express-session');
 const bodyParser = require('body-parser');
-const cors = require('cors');
+
 const authRoutes = require('./routes/authRoutes'); // Import the routes
 const learningPathRoutes = require('./routes/learningPathRoutes');
 const coursesRoutes = require('./routes/CourseRoute');
+const assignCourseRoutes = require('./routes/assignCourseRoutes');
+const enrolledCoursesRoute = require('./routes/enrolledCoursesRoute')
+
 const app = express();
 const PORT = process.env.PORT || 5000;
-
+const cors = require('cors');
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
@@ -25,6 +28,12 @@ app.use(session({
 app.use('/auth', authRoutes);
 app.use('/api/learning-paths', learningPathRoutes);
 app.use('/api/courses', coursesRoutes);
+app.use('/api/enrolled-courses',enrolledCoursesRoute)
+app.use('/api', assignCourseRoutes);
+
+// app.js
+
+
 
 // Start server
 app.listen(PORT, () => {

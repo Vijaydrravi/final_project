@@ -6,12 +6,26 @@ const createLearningPath = async (req, res) => {
   const { title, description } = req.body;
 
   try {
-    const newLearningPath = await prisma.learningPath.create({
-      data: {
-        title,
-        description,
-      },
+    // Check if the description meets the minimum length requirement
+    if (!description || description.length < 45) {
+      return res.status(400).json({ error: 'Description must be at least 45 characters long.' });
+    }
+
+    // Check if the learning path already exists using findFirst
+    const existingPath = await prisma.learningPath.findFirst({
+      where: { title }, // Use findFirst instead of findUnique
     });
+
+    // If it exists, return a message or handle it as needed
+    if (existingPath) {
+      return res.status(400).json({ error: 'Learning path with this title already exists.' });
+    }
+
+    // Create the new learning path if it doesn't exist and description is valid
+    const newLearningPath = await prisma.learningPath.create({
+      data: { title, description },
+    });
+
     res.status(201).json(newLearningPath);
   } catch (error) {
     console.error('Error creating learning path:', error);
@@ -36,13 +50,16 @@ const updateLearningPath = async (req, res) => {
   const { title, description } = req.body;
 
   try {
+    // Optionally check for description length and existence here as well
+    if (description && description.length < 45) {
+      return res.status(400).json({ error: 'Description must be at least 45 characters long.' });
+    }
+
     const updatedLearningPath = await prisma.learningPath.update({
       where: { id: parseInt(id) },
-      data: {
-        title,
-        description,
-      },
+      data: { title, description },
     });
+
     res.json(updatedLearningPath);
   } catch (error) {
     console.error('Error updating learning path:', error);
@@ -54,5 +71,5 @@ const updateLearningPath = async (req, res) => {
 module.exports = {
   createLearningPath,
   getLearningPaths,
-  updateLearningPath, // Add this line for update functionality
+  updateLearningPath,
 };

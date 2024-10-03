@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AddLearningPath = () => {
   const [title, setTitle] = useState('');
@@ -19,6 +21,7 @@ const AddLearningPath = () => {
         setLearningPaths(data);
       } catch (error) {
         console.error('Error fetching learning paths:', error);
+        toast.error('Error fetching learning paths. Please try again later.'); // Error toast for fetching
       } finally {
         setLoading(false);
       }
@@ -30,7 +33,13 @@ const AddLearningPath = () => {
   // Handle form submission for adding/updating learning path
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
+    // Validation for minimum description length
+    if (description.length < 45) {
+      toast.error('Description must be at least 45 characters long.');
+      return;
+    }
+
     try {
       const method = editingId ? 'PUT' : 'POST'; // Determine if it's an update or create operation
       const url = editingId 
@@ -49,7 +58,9 @@ const AddLearningPath = () => {
       });
 
       if (!response.ok) {
-        throw new Error(editingId ? 'Failed to update learning path' : 'Failed to add learning path');
+        const errorMessage = editingId ? 'Failed to update learning path.' : 'Failed to add learning path.';
+        toast.error(errorMessage);
+        throw new Error(errorMessage);
       }
 
       // Reset form fields after successful submission
@@ -62,10 +73,12 @@ const AddLearningPath = () => {
       const updatedData = await updatedResponse.json();
       setLearningPaths(updatedData);
 
-      alert(editingId ? 'Learning Path Updated Successfully!' : 'Learning Path Added Successfully!');
+      // Show success notification using Toastify
+      toast.success(editingId ? 'Learning Path Updated Successfully!' : 'Learning Path Added Successfully!');
     } catch (error) {
       console.error('Error adding/updating learning path:', error);
-      alert(editingId ? 'Error updating learning path' : 'Error adding learning path');
+      // Show error notification using Toastify
+      toast.error(editingId ? 'Error updating learning path. Please try again.' : 'Error adding learning path. Please try again.');
     }
   };
 
@@ -80,7 +93,7 @@ const AddLearningPath = () => {
     <div className="mt-10">
       <h2 className="text-2xl font-bold mb-4">{editingId ? 'Edit' : 'Add'} Learning Path</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
+        <div className='grid '>
           <label className="block mb-2" htmlFor="title">Title</label>
           <input
             type="text"
@@ -89,6 +102,7 @@ const AddLearningPath = () => {
             onChange={(e) => setTitle(e.target.value)}
             required
             className="border border-gray-300 p-2 w-full rounded focus:outline-none focus:ring focus:ring-blue-400"
+       
           />
         </div>
         <div>
@@ -98,6 +112,7 @@ const AddLearningPath = () => {
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             className="border border-gray-300 p-2 w-full rounded focus:outline-none focus:ring focus:ring-blue-400"
+         
           />
         </div>
         <button type="submit" className="bg-blue-600 text-white py-2 px-4 rounded">
@@ -109,34 +124,41 @@ const AddLearningPath = () => {
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <table className="min-w-full mt-4 border border-gray-300">
-          <thead>
-            <tr className="bg-gray-100">
-              <th className="border-b px-4 py-2 text-left">ID</th>
-              <th className="border-b px-4 py-2 text-left">Title</th>
-              <th className="border-b px-4 py-2 text-left">Description</th>
-              <th className="border-b px-4 py-2 text-left">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {learningPaths.map((path) => (
-              <tr key={path.id} className="hover:bg-gray-50">
-                <td className="border-b px-4 py-2">{path.id}</td>
-                <td className="border-b px-4 py-2">{path.title}</td>
-                <td className="border-b px-4 py-2">{path.description || 'N/A'}</td>
-                <td className="border-b px-4 py-2">
-                  <button
-                    onClick={() => handleEdit(path)}
-                    className="bg-yellow-500 text-white py-1 px-2 rounded"
-                  >
-                    Edit
-                  </button>
-                </td>
+        <div style={{ width: '100%', overflowX: 'auto' }}> {/* Set the width of the table to 50% */}
+          <table className="min-w-full mt-4 border border-gray-300">
+            <thead>
+              <tr className="bg-gray-100">
+                <th className="border-b px-4 py-2 text-left">ID</th>
+                <th className="border-b px-4 py-2 text-left">Title</th>
+                <th className="border-b px-4 py-2 text-left">Description</th>
+                <th className="border-b px-4 py-2 text-left">Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {learningPaths.map((path) => (
+                <tr key={path.id} className="hover:bg-gray-50">
+                  <td className="border-b px-4 py-2">{path.id}</td>
+                  <td className="border-b px-4 py-2">{path.title}</td>
+                  <td className="border-b px-4 py-2" style={{ maxWidth: '200px', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'wrap' }}>
+                    {path.description || 'N/A'}
+                  </td>
+                  <td className="border-b px-4 py-2">
+                    <button
+                      onClick={() => handleEdit(path)}
+                      className="bg-yellow-500 text-white py-1 px-2 rounded"
+                    >
+                      Edit
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )}
+      
+      {/* Toast container for notifications */}
+      <ToastContainer />
     </div>
   );
 };

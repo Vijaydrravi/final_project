@@ -62,7 +62,14 @@ CREATE TABLE "Certificates" (
 );
 
 -- CreateTable
-C
+CREATE TABLE "LearningPath" (
+    "id" SERIAL NOT NULL,
+    "title" TEXT NOT NULL,
+    "description" TEXT,
+    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "LearningPath_pkey" PRIMARY KEY ("id")
+);
 
 -- CreateTable
 CREATE TABLE "CourseLearningPath" (
@@ -75,6 +82,9 @@ CREATE TABLE "CourseLearningPath" (
 
 -- CreateIndex
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Course_title_key" ON "Course"("title");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "PerformanceRating_assignment_id_key" ON "PerformanceRating"("assignment_id");
