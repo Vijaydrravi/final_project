@@ -19,11 +19,12 @@ model User {
   email              String                @unique
   password           String
   designation        String?
-  name               String                // Add name field here
-  courseAssignments  CourseAssignment[]    // Relation to course assignments
-  performanceRatings PerformanceRating[]   // Relation to performance ratings
-  performanceSummary PerformanceSummary?   // Summary performance per employee
-  certificates       Certificates[]        // Relation to certificates
+  name               String
+  role               String                @default("employee") // Add role with default value
+  courseAssignments  CourseAssignment[]    
+  performanceRatings PerformanceRating[]   
+  performanceSummary PerformanceSummary?   
+  certificates       Certificates[]        
 }
 
 

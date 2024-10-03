@@ -5,6 +5,7 @@ CREATE TABLE "User" (
     "password" TEXT NOT NULL,
     "designation" TEXT,
     "name" TEXT NOT NULL,
+    "role" TEXT NOT NULL DEFAULT 'employee',
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
@@ -61,14 +62,7 @@ CREATE TABLE "Certificates" (
 );
 
 -- CreateTable
-CREATE TABLE "LearningPath" (
-    "id" SERIAL NOT NULL,
-    "title" TEXT NOT NULL,
-    "description" TEXT,
-    "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-
-    CONSTRAINT "LearningPath_pkey" PRIMARY KEY ("id")
-);
+C
 
 -- CreateTable
 CREATE TABLE "CourseLearningPath" (
