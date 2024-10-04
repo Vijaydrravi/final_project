@@ -77,10 +77,41 @@ exports.assignCourse = async (req, res) => {
       },
     });
 
+    //create a new performance summary with default average rating is 0
+    const {learning_path_id} = await prisma.courseLearningPath.findFirst(
+      {
+        where:{
+          course_id:parseInt(courseId)
+        }
+      }
+    )
+    console.log(learning_path_id)
+
+    const getPerformanceSummary = await prisma.performanceSummary.findFirst(
+      {
+        where:{
+          user_id:parseInt(userId),
+          learning_path_id: parseInt(learning_path_id)
+        }
+      }
+    )
+   console.log(getPerformanceSummary)
+   if(!getPerformanceSummary)
+   {
+    await prisma.performanceSummary.create(
+      {
+        data:{
+         user_id:parseInt(userId),
+         average_rating:0,
+         learning_path_id:parseInt(learning_path_id)
+        }
+      }
+    )
+    console.log("sucess bro")
+   }
     res.json(assignment);
   } catch (error) {
     console.error('Error assigning course:', error);
     res.status(500).json({ error: 'Failed to assign course' });
   }
 };
-

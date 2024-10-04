@@ -95,7 +95,7 @@ CREATE UNIQUE INDEX "Course_title_key" ON "Course"("title");
 CREATE UNIQUE INDEX "PerformanceRating_assignment_id_key" ON "PerformanceRating"("assignment_id");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "PerformanceSummary_user_id_key" ON "PerformanceSummary"("user_id");
+CREATE UNIQUE INDEX "PerformanceSummary_user_id_learning_path_id_key" ON "PerformanceSummary"("user_id", "learning_path_id");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Certificates_assignment_id_key" ON "Certificates"("assignment_id");

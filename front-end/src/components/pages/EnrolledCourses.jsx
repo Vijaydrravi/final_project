@@ -6,7 +6,6 @@ import 'react-toastify/dist/ReactToastify.css'; // Import toastify CSS
 const EnrolledCourses = () => {
   const { userId } = useAuth();
   const [enrolledCourses, setEnrolledCourses] = useState([]);
-  const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [selectedCourse, setSelectedCourse] = useState(null);
@@ -14,8 +13,6 @@ const EnrolledCourses = () => {
   const [quizScore, setQuizScore] = useState('');
   const [engagementScore, setEngagementScore] = useState('');
   const [assignmentGrade, setAssignmentGrade] = useState('');
-  const [completionTime, setCompletionTime] = useState(''); // New state for completion_time
-  const [interactionTime, setInteractionTime] = useState(''); // New state for interaction_time
   
   useEffect(() => {
     const fetchEnrolledCourses = async () => {
@@ -29,8 +26,7 @@ const EnrolledCourses = () => {
           data.sort((a, b) => a.course.title.localeCompare(b.course.title));
           setEnrolledCourses(data);
         } catch (error) {
-          setError(error.message);
-          toast.error(error.message); // Display error message using toast
+          toast.error(error.message); // Display error using toast
         } finally {
           setLoading(false);
         }
@@ -48,8 +44,6 @@ const EnrolledCourses = () => {
     setQuizScore(course.quiz_score || ''); // Pre-fill quiz score
     setEngagementScore(course.engagement_score || ''); // Pre-fill engagement score
     setAssignmentGrade(course.assignment_grade || ''); // Pre-fill assignment grade
-    setCompletionTime(course.completion_time || ''); // Pre-fill completion time
-    setInteractionTime(course.interaction_time || ''); // Pre-fill interaction time
     setIsDialogOpen(true);
   };
 
@@ -60,8 +54,6 @@ const EnrolledCourses = () => {
     setQuizScore('');
     setEngagementScore('');
     setAssignmentGrade('');
-    setCompletionTime('');
-    setInteractionTime('');
   };
 
   const handleProgressUpdate = async (e) => {
@@ -100,16 +92,6 @@ const EnrolledCourses = () => {
       return;
     }
 
-    if (completionTime && completionTime < 0) {
-      toast.error('Please enter a valid completion time (must be non-negative).');
-      return;
-    }
-
-    if (interactionTime && interactionTime < 0) {
-      toast.error('Please enter a valid interaction time (must be non-negative).');
-      return;
-    }
-
     if (selectedCourse) {
       try {
         const response = await fetch(`http://localhost:5000/api/enrolled-courses/update-progress/${selectedCourse.id}`, {
@@ -120,8 +102,6 @@ const EnrolledCourses = () => {
             quiz_score: quizScore,
             engagement_score: engagementScore,
             assignment_grade: assignmentGrade,
-            completion_time: completionTime,
-            interaction_time: interactionTime,
           }),
         });
 
@@ -139,8 +119,6 @@ const EnrolledCourses = () => {
                   quiz_score: quizScore,
                   engagement_score: engagementScore,
                   assignment_grade: assignmentGrade,
-                  completion_time: completionTime,
-                  interaction_time: interactionTime,
                 }
               : course
           )
@@ -149,8 +127,7 @@ const EnrolledCourses = () => {
         handleDialogClose(); // Close dialog on success
         toast.success('Progress updated successfully!'); // Display success message
       } catch (error) {
-        setError(error.message);
-        toast.error(error.message); // Display error message using toast
+        toast.error(error.message); // Display error using toast
       }
     }
   };
@@ -162,7 +139,6 @@ const EnrolledCourses = () => {
   return (
     <div className="mt-6 p-4">
       <h3 className="text-2xl font-bold mb-4">Enrolled Courses</h3>
-      {error && <p className="text-red-500">{error}</p>}
       {enrolledCourses.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {enrolledCourses.map((course) => (
@@ -229,22 +205,7 @@ const EnrolledCourses = () => {
                 onChange={(e) => setAssignmentGrade(e.target.value)}
                 className="border border-gray-300 p-2 rounded w-full mb-4"
               />
-              <label htmlFor="completionTime" className="block mb-2 text-gray-700">Completion Time (in hours)</label>
-              <input
-                id="completionTime"
-                type="number"
-                value={completionTime}
-                onChange={(e) => setCompletionTime(e.target.value)}
-                className="border border-gray-300 p-2 rounded w-full mb-4"
-              />
-              <label htmlFor="interactionTime" className="block mb-2 text-gray-700">Interaction Time (in hours)</label>
-              <input
-                id="interactionTime"
-                type="number"
-                value={interactionTime}
-                onChange={(e) => setInteractionTime(e.target.value)}
-                className="border border-gray-300 p-2 rounded w-full mb-4"
-              />
+          
               <div className="flex justify-between">
                 <button
                   type="button"
@@ -265,7 +226,7 @@ const EnrolledCourses = () => {
         </div>
       )}
 
-      <ToastContainer /> {/* Add ToastContainer for toast notifications */}
+      <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} closeOnClick />
     </div>
   );
 };

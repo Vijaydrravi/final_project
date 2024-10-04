@@ -23,7 +23,7 @@ model User {
   role               String                @default("employee") // Add role with default value
   courseAssignments  CourseAssignment[]    
   performanceRatings PerformanceRating[]   
-  performanceSummary PerformanceSummary?   
+  performanceSummary PerformanceSummary[]   
   certificates       Certificates[]        
 }
 
@@ -65,13 +65,16 @@ model PerformanceRating {
 }
 
 model PerformanceSummary {
-  id              Int           @id @default(autoincrement())
-  user_id         Int           @unique
-  average_rating  Float
-  user            User          @relation(fields: [user_id], references: [id], onDelete: Cascade)
-  learning_path_id Int           // Link to learning path
-  learningPath    LearningPath  @relation(fields: [learning_path_id], references: [id], onDelete: Cascade)
+  id               Int           @id @default(autoincrement())
+  user_id          Int
+  average_rating   Float
+  learning_path_id Int
+  user             User          @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  learningPath     LearningPath  @relation(fields: [learning_path_id], references: [id], onDelete: Cascade)
+
+  @@unique([user_id, learning_path_id])  // Ensure unique combination of user and learning path
 }
+
 
 model Certificates {
   id             Int             @id @default(autoincrement())
