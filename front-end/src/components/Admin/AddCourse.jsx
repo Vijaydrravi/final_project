@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AddCourse = () => {
   const [title, setTitle] = useState('');
   const [duration, setDuration] = useState('');
-  const [difficultyLevel, setDifficultyLevel] = useState('Beginner'); // Set default difficulty level
+  const [difficultyLevel, setDifficultyLevel] = useState('Beginner');
   const [learningPaths, setLearningPaths] = useState([]);
   const [selectedLearningPath, setSelectedLearningPath] = useState('');
 
@@ -15,6 +17,7 @@ const AddCourse = () => {
         const data = await response.json();
         setLearningPaths(data);
       } catch (error) {
+        toast.error('Error fetching learning paths');
         console.error('Error fetching learning paths:', error);
       }
     };
@@ -24,6 +27,12 @@ const AddCourse = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Check if all fields are filled
+    if (!title || !duration || !selectedLearningPath) {
+      toast.error('All fields must be filled');
+      return;
+    }
 
     try {
       const response = await fetch('http://localhost:5000/api/courses', {
@@ -39,19 +48,27 @@ const AddCourse = () => {
         }),
       });
 
+      if (response.status === 400) {
+        const errorData = await response.json();
+        toast.error(errorData.error); // Show error message from backend
+        return;
+      }
+
       if (!response.ok) {
         throw new Error('Failed to add course');
       }
 
+      // Success notification
+      toast.success('Course Added Successfully!');
+      
       // Optionally reset form after successful submission
       setTitle('');
       setDuration('');
-      setDifficultyLevel('Beginner'); // Reset to default difficulty level
+      setDifficultyLevel('Beginner');
       setSelectedLearningPath('');
-      alert('Course Added Successfully!');
     } catch (error) {
-      console.error(error);
-      alert('Error adding course');
+      console.error('Error adding course:', error);
+      toast.error('Error adding course');
     }
   };
 
@@ -114,6 +131,9 @@ const AddCourse = () => {
           Add Course
         </button>
       </form>
+      
+      {/* Toast Container for displaying notifications */}
+      <ToastContainer />
     </div>
   );
 };

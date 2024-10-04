@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from './AuthContext'; // Adjust the path if necessary
+import { toast, ToastContainer } from 'react-toastify'; // Import toast and ToastContainer
+import 'react-toastify/dist/ReactToastify.css'; // Import toastify CSS
 
 const EnrolledCourses = () => {
   const { userId } = useAuth();
@@ -9,7 +11,12 @@ const EnrolledCourses = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [selectedCourse, setSelectedCourse] = useState(null);
   const [newProgress, setNewProgress] = useState('');
-
+  const [quizScore, setQuizScore] = useState('');
+  const [engagementScore, setEngagementScore] = useState('');
+  const [assignmentGrade, setAssignmentGrade] = useState('');
+  const [completionTime, setCompletionTime] = useState(''); // New state for completion_time
+  const [interactionTime, setInteractionTime] = useState(''); // New state for interaction_time
+  
   useEffect(() => {
     const fetchEnrolledCourses = async () => {
       if (userId) {
@@ -19,22 +26,16 @@ const EnrolledCourses = () => {
             throw new Error('Failed to fetch enrolled courses');
           }
           const data = await response.json();
-
-          // Sort courses by title and then by courseAssignmentId
-          data.sort((a, b) => {
-            const titleComparison = a.course.title.localeCompare(b.course.title);
-            if (titleComparison !== 0) return titleComparison; // If titles are different, return comparison
-            return a.courseAssignmentId - b.courseAssignmentId; // If titles are the same, compare by courseAssignmentId
-          });
-
+          data.sort((a, b) => a.course.title.localeCompare(b.course.title));
           setEnrolledCourses(data);
         } catch (error) {
           setError(error.message);
+          toast.error(error.message); // Display error message using toast
         } finally {
           setLoading(false);
         }
       } else {
-        setLoading(false); // Ensure loading is set to false if userId is not defined
+        setLoading(false);
       }
     };
 
@@ -44,6 +45,11 @@ const EnrolledCourses = () => {
   const handleCardClick = (course) => {
     setSelectedCourse(course);
     setNewProgress(course.progress); // Pre-fill progress
+    setQuizScore(course.quiz_score || ''); // Pre-fill quiz score
+    setEngagementScore(course.engagement_score || ''); // Pre-fill engagement score
+    setAssignmentGrade(course.assignment_grade || ''); // Pre-fill assignment grade
+    setCompletionTime(course.completion_time || ''); // Pre-fill completion time
+    setInteractionTime(course.interaction_time || ''); // Pre-fill interaction time
     setIsDialogOpen(true);
   };
 
@@ -51,54 +57,122 @@ const EnrolledCourses = () => {
     setIsDialogOpen(false);
     setSelectedCourse(null);
     setNewProgress('');
+    setQuizScore('');
+    setEngagementScore('');
+    setAssignmentGrade('');
+    setCompletionTime('');
+    setInteractionTime('');
   };
 
   const handleProgressUpdate = async (e) => {
     e.preventDefault();
+
+    // Validate fields
+    if (!newProgress || newProgress < 0 || newProgress > 100) {
+      toast.error('Please enter a valid progress percentage (0-100).');
+      return;
+    }
+
+    if (!quizScore && quizScore !== 0) {
+      toast.error('Please enter a valid quiz score (0-100) or leave blank.');
+      return;
+    }
+    if (quizScore < 0 || quizScore > 100) {
+      toast.error('Please enter a valid quiz score (0-100).');
+      return;
+    }
+
+    if (!engagementScore && engagementScore !== 0) {
+      toast.error('Please enter a valid engagement score (0-100) or leave blank.');
+      return;
+    }
+    if (engagementScore < 0 || engagementScore > 100) {
+      toast.error('Please enter a valid engagement score (0-100).');
+      return;
+    }
+
+    if (!assignmentGrade && assignmentGrade !== 0) {
+      toast.error('Please enter a valid assignment grade (0-100) or leave blank.');
+      return;
+    }
+    if (assignmentGrade < 0 || assignmentGrade > 100) {
+      toast.error('Please enter a valid assignment grade (0-100).');
+      return;
+    }
+
+    if (completionTime && completionTime < 0) {
+      toast.error('Please enter a valid completion time (must be non-negative).');
+      return;
+    }
+
+    if (interactionTime && interactionTime < 0) {
+      toast.error('Please enter a valid interaction time (must be non-negative).');
+      return;
+    }
+
     if (selectedCourse) {
       try {
         const response = await fetch(`http://localhost:5000/api/enrolled-courses/update-progress/${selectedCourse.id}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ progress: newProgress }),
+          body: JSON.stringify({
+            progress: newProgress,
+            quiz_score: quizScore,
+            engagement_score: engagementScore,
+            assignment_grade: assignmentGrade,
+            completion_time: completionTime,
+            interaction_time: interactionTime,
+          }),
         });
 
         if (!response.ok) {
           throw new Error('Failed to update progress');
         }
 
-        // Update the progress of the selected course in the state directly
+        // Update the course data in the state directly
         setEnrolledCourses((prevCourses) =>
           prevCourses.map((course) =>
-            course.id === selectedCourse.id ? { ...course, progress: newProgress } : course
+            course.id === selectedCourse.id
+              ? {
+                  ...course,
+                  progress: newProgress,
+                  quiz_score: quizScore,
+                  engagement_score: engagementScore,
+                  assignment_grade: assignmentGrade,
+                  completion_time: completionTime,
+                  interaction_time: interactionTime,
+                }
+              : course
           )
         );
 
         handleDialogClose(); // Close dialog on success
+        toast.success('Progress updated successfully!'); // Display success message
       } catch (error) {
         setError(error.message);
+        toast.error(error.message); // Display error message using toast
       }
     }
   };
 
   if (loading) {
-    return <p>Loading enrolled courses...</p>; // Loading state message
+    return <p>Loading enrolled courses...</p>;
   }
 
   return (
     <div className="mt-6 p-4">
       <h3 className="text-2xl font-bold mb-4">Enrolled Courses</h3>
-      {error && <p className="text-red-500">{error}</p>} {/* Error message */}
+      {error && <p className="text-red-500">{error}</p>}
       {enrolledCourses.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {enrolledCourses.map((course) => (
             <div
               key={course.id}
               className="bg-white shadow-md rounded-lg overflow-hidden cursor-pointer"
-              onClick={() => handleCardClick(course)} // Open dialog on card click
+              onClick={() => handleCardClick(course)}
             >
               <img
-                src={course.course.image || 'https://via.placeholder.com/300'} // Placeholder image if none provided
+                src={course.course.image || 'https://via.placeholder.com/300'}
                 alt={course.course.title}
                 className="w-full h-48 object-cover"
               />
@@ -120,9 +194,7 @@ const EnrolledCourses = () => {
           <div className="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full">
             <h2 className="text-lg font-bold mb-4">Update Progress for {selectedCourse.course.title}</h2>
             <form onSubmit={handleProgressUpdate}>
-              <label htmlFor="progress" className="block mb-2 text-gray-700">
-                Progress (%)
-              </label>
+              <label htmlFor="progress" className="block mb-2 text-gray-700">Progress (%)</label>
               <input
                 id="progress"
                 type="number"
@@ -133,17 +205,57 @@ const EnrolledCourses = () => {
                 className="border border-gray-300 p-2 rounded w-full mb-4"
                 required
               />
-              <div className="flex justify-end">
+              <label htmlFor="quizScore" className="block mb-2 text-gray-700">Quiz Score</label>
+              <input
+                id="quizScore"
+                type="number"
+                value={quizScore}
+                onChange={(e) => setQuizScore(e.target.value)}
+                className="border border-gray-300 p-2 rounded w-full mb-4"
+              />
+              <label htmlFor="engagementScore" className="block mb-2 text-gray-700">Engagement Score</label>
+              <input
+                id="engagementScore"
+                type="number"
+                value={engagementScore}
+                onChange={(e) => setEngagementScore(e.target.value)}
+                className="border border-gray-300 p-2 rounded w-full mb-4"
+              />
+              <label htmlFor="assignmentGrade" className="block mb-2 text-gray-700">Assignment Grade</label>
+              <input
+                id="assignmentGrade"
+                type="number"
+                value={assignmentGrade}
+                onChange={(e) => setAssignmentGrade(e.target.value)}
+                className="border border-gray-300 p-2 rounded w-full mb-4"
+              />
+              <label htmlFor="completionTime" className="block mb-2 text-gray-700">Completion Time (in hours)</label>
+              <input
+                id="completionTime"
+                type="number"
+                value={completionTime}
+                onChange={(e) => setCompletionTime(e.target.value)}
+                className="border border-gray-300 p-2 rounded w-full mb-4"
+              />
+              <label htmlFor="interactionTime" className="block mb-2 text-gray-700">Interaction Time (in hours)</label>
+              <input
+                id="interactionTime"
+                type="number"
+                value={interactionTime}
+                onChange={(e) => setInteractionTime(e.target.value)}
+                className="border border-gray-300 p-2 rounded w-full mb-4"
+              />
+              <div className="flex justify-between">
                 <button
                   type="button"
                   onClick={handleDialogClose}
-                  className="bg-red-500 text-white px-4 py-2 rounded mr-2"
+                  className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="bg-blue-500 text-white px-4 py-2 rounded"
+                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                 >
                   Update
                 </button>
@@ -152,6 +264,8 @@ const EnrolledCourses = () => {
           </div>
         </div>
       )}
+
+      <ToastContainer /> {/* Add ToastContainer for toast notifications */}
     </div>
   );
 };

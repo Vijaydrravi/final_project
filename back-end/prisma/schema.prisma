@@ -38,16 +38,22 @@ model User {
   }
 
 model CourseAssignment {
-  id             Int                  @id @default(autoincrement())
-  user_id        Int
-  course_id      Int
-  user           User                 @relation(fields: [user_id], references: [id], onDelete: Cascade)
-  course         Course               @relation(fields: [course_id], references: [id], onDelete: Cascade)
-  progress       Int                  // Percentage of course completed
-  assignment_date DateTime            @default(now())
-  performance    PerformanceRating?   // Performance of the user in this course
-  certificates   Certificates[]       // Relation to certificates for the course
+  id               Int                  @id @default(autoincrement())
+  user_id          Int
+  course_id        Int
+  user             User                 @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  course           Course               @relation(fields: [course_id], references: [id], onDelete: Cascade)
+  progress         Int                  // Percentage of course completed
+  assignment_date  DateTime             @default(now())
+  performance      PerformanceRating?   // Performance of the user in this course
+  certificates     Certificates[]       // Relation to certificates for the course
+  quiz_score       Float?               // Average score of quizzes and assessments
+  interaction_time Float?               // Time spent on the course (in hours)
+  completion_time  Int?                 // Total time taken to complete the course (in days or minutes)
+  engagement_score Int?                 // Measure of engagement (forum participation, interaction)
+  assignment_grade Int?                 // Grade received for assignments/projects
 }
+
 
 model PerformanceRating {
   id             Int              @id @default(autoincrement())

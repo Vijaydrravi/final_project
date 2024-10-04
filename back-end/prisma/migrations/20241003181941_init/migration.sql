@@ -27,6 +27,11 @@ CREATE TABLE "CourseAssignment" (
     "course_id" INTEGER NOT NULL,
     "progress" INTEGER NOT NULL,
     "assignment_date" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "quiz_score" DOUBLE PRECISION,
+    "interaction_time" DOUBLE PRECISION,
+    "completion_time" INTEGER,
+    "engagement_score" INTEGER,
+    "assignment_grade" INTEGER,
 
     CONSTRAINT "CourseAssignment_pkey" PRIMARY KEY ("id")
 );

@@ -68,9 +68,19 @@ exports.assignCourse = async (req, res) => {
       },
     });
 
+    // Create a new PerformanceRating with default rating of 0
+    await prisma.performanceRating.create({
+      data: {
+        rating: 0, // Default rating is 0
+        user_id: parseInt(userId),
+        assignment_id: assignment.id, // Correctly using the assignment's id
+      },
+    });
+
     res.json(assignment);
   } catch (error) {
     console.error('Error assigning course:', error);
     res.status(500).json({ error: 'Failed to assign course' });
   }
 };
+
