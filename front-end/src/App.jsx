@@ -11,19 +11,32 @@ import AddLearningPath from './components/Admin/AddLearningPath';
 import ViewCourses from './components/admin/ViewCourses';
 import EnrolledCourses from './components/pages/EnrolledCourses'; // Import Enrolled Courses component
 
+// Protected route for authenticated users
 const ProtectedRoute = ({ children }) => {
   const { token } = useAuth();
   return token ? children : <Navigate to="/login" />;
 };
 
+// Role-based route for admin and employee
 const RoleBasedRoute = ({ children }) => {
   const { token } = useAuth();
   const role = localStorage.getItem('role'); // Get the role from localStorage
 
   if (!token) return <Navigate to="/login" />;
 
-  // Render different homepages based on the role
   return role === 'admin' ? children : <Navigate to="/employee-home" />;
+};
+
+// Public route for login and signup
+const PublicRoute = ({ children }) => {
+  const { token } = useAuth();
+
+  // Redirect to home based on the role if the user is already logged in
+  return token ? (
+    localStorage.getItem('role') === 'admin' ? <Navigate to="/dashboard" /> : <Navigate to="/employee-home" />
+  ) : (
+    children
+  );
 };
 
 const App = () => {
@@ -31,8 +44,23 @@ const App = () => {
     <AuthProvider>
       <Router>
         <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
+          {/* Use PublicRoute for login and signup */}
+          <Route 
+            path="/login" 
+            element={
+              <PublicRoute>
+                <Login />
+              </PublicRoute>
+            } 
+          />
+          <Route 
+            path="/signup" 
+            element={
+              <PublicRoute>
+                <SignUp />
+              </PublicRoute>
+            } 
+          />
 
           {/* Employee Routes */}
           <Route path="/employee-home" element={
