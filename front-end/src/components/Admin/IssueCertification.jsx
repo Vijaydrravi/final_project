@@ -26,10 +26,19 @@ const IssueCertification = () => {
 
   const handleApprove = async (assignmentId) => {
     try {
-      await axios.post(`http://localhost:5000/api/certifications/approve/${assignmentId}`);
+      const response = await axios.post(`http://localhost:5000/api/certifications/approve/${assignmentId}`);
       toast.success("Certification approved successfully!");
-      // Optionally, refetch or update the UI after approval
-      setUsers((prevUsers) => prevUsers.filter((user) => user.id !== assignmentId)); // Remove the approved user from the list
+
+      // Update the user with the new certification data
+      const updatedUser = {
+        ...users.find((user) => user.id === assignmentId),
+        certificates: { ...response.data.certification } // Add the newly generated certificate data
+      };
+
+      setUsers((prevUsers) => 
+        prevUsers.map((user) => (user.id === assignmentId ? updatedUser : user))
+      ); // Update the specific user with the new data
+      
     } catch (error) {
       console.error("Error approving certificate:", error);
       toast.error("Failed to approve certification.");
@@ -71,7 +80,10 @@ const IssueCertification = () => {
                       Approve
                     </button>
                   ) : (
-                    <span className="text-green-600">Certified</span>
+                    <span className="text-green-600">
+                      Certified
+                      <a href={user.certificates.image} target="_blank" rel="noopener noreferrer" className="ml-2 text-blue-500">View Certificate</a>
+                    </span>
                   )}
                 </td>
               </tr>

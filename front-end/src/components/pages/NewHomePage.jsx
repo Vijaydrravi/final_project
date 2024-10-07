@@ -21,7 +21,7 @@ const NewHomePage = () => {
         <h1 className="text-2xl font-bold mb-6">Course Management</h1>
         <ul>
           <li className="mb-4">
-            <Link to="/employee-home" className="hover:text-blue-300">
+            <Link to="/employee-home/dashboard  " className="hover:text-blue-300">
               Dashboard
             </Link>
           </li>

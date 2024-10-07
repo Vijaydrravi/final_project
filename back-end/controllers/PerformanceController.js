@@ -30,47 +30,98 @@ const getLearningPaths = async (req, res) => {
       const parsedLearningPathId = learningPathId !== 'all' ? parseInt(learningPathId) : null; // Parse learningPathId if it's not 'all'
   
       // Query to fetch performance data
-const performanceData = await prisma.courseAssignment.findMany({
-    where: {
-      user_id: parsedUserId, // Filter by user ID
-      ...(parsedLearningPathId && { // Only filter by learning path if it's specified
-        course: {
-          learningPaths: {
-            some: { // Use 'some' to find courses associated with the learning path
-              id: parseInt(parsedLearningPathId), // Ensure the ID is parsed as an integer
+      if(learningPathId === 'all'){
+        const performanceData = await prisma.courseAssignment.findMany({
+          where: {
+            user_id: parsedUserId, // Filter by user ID
+            ...(learningPathId !== 'all' && { // Only filter by learning path if specified
+              course: {
+                learningPaths: {
+                  some: {
+                    id: parsedLearningPathId, // Use parsed learning path ID
+                  },
+                },
+              },
+            }),
+          },
+          include: { // Use include for deeper querying
+            course: {
+              select: {
+                id: true, // Select course ID
+                title: true, // Select course title
+                duration: true, // Select course duration
+                difficulty_level: true, // Select difficulty level
+              },
+            },
+            performance: {
+              select: {
+                rating: true, // Select performance rating
+              },
             },
           },
-        },
-      }),
-    },
-    include: { // Use include for deeper querying
-      course: {
-        select: {
-          id: true, // Select course ID if needed
-          title: true, // Select course title
-        },
-      },
-      performance: {
-        select: {
-          rating: true, // Select performance rating
-        },
-      },
-    },
-  });
-  
-  console.log(performanceData); // Log the raw performance data
-  
-  // Ensure you have the correct data structure for your response
-  const formattedData = performanceData.map((entry) => ({
-    courseTitle: entry.course.title,
-    courseId: entry.course.id, // Include course ID if needed
-    rating: entry.performance?.rating || 'N/A', // Default to 'N/A' if no rating exists
-  }));
-  
-  // Log the formatted data to check what is being returned
-  console.log('Formatted Performance Data:', formattedData);
-  
-  res.status(200).json(formattedData); // Send formatted data as the response
+        });
+        
+        // Log the raw performance data
+        console.log(performanceData);
+        
+        // Ensure you have the correct data structure for your response
+        const formattedData = performanceData.map((entry) => ({
+          id: entry.course.id, // Course ID
+          title: entry.course.title, // Course title
+          duration: entry.course.duration, // Course duration
+          difficulty_level: entry.course.difficulty_level, // Difficulty level
+          rating: entry.performance?.rating || 'N/A', // Default to 'N/A' if no rating exists
+        }));
+        
+        // Log the formatted data to check what is being returned
+        console.log('Formatted Performance Data:', formattedData);
+        
+        // Send formatted data as the response
+        res.status(200).json(formattedData);
+      }
+      else
+      {
+        const courses = await prisma.courseAssignment.findMany({
+          where: {
+            user_id: parsedUserId, // Replace with your specific user ID
+            course: {
+              learningPaths: {
+                some: {
+                  learning_path_id: parsedLearningPathId, // Use the learning path ID to filter
+                },
+              },
+            },
+          },
+          include: {
+            course: {
+              select: {
+                id: true,
+                title: true,
+                duration: true,
+                difficulty_level: true,
+              },
+            },
+            performance: { // Include the performance rating
+              select: {
+                rating: true, // Assuming 'rating' is what you want to show as the course score
+              },
+            },
+          },
+        });
+        
+        // Format the result to include course details and scores
+        const formattedCourses = courses.map((assignment) => ({
+          id: assignment.course.id,
+          title: assignment.course.title,
+          duration: assignment.course.duration,
+          difficulty_level: assignment.course.difficulty_level,
+          rating: assignment.performance ? assignment.performance.rating : 'N/A', // Default to 'N/A' if no rating exists
+        }));
+        
+        console.log(formattedCourses);
+        res.json(formattedCourses);
+        
+      }
   
       // const courses = await prisma.courseAssignment.findMany({
       //   where: {

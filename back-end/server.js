@@ -10,7 +10,7 @@ const enrolledCoursesRoute = require('./routes/enrolledCoursesRoute')
 const performanceRoutes = require('./routes/performanceRoutes')
 const learningPathPerformanceRoutes = require('./routes/learningPathPerformanceRoutes')
 const CertificationRoutes = require('./routes/CertificationRoutes')
-
+const dashboardRoutes = require('./routes/dashboardRoutes')
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -37,6 +37,9 @@ app.use('/api', assignCourseRoutes);
 app.use('/api/my-performance',performanceRoutes)
 app.use('/api/learningpath-performance',learningPathPerformanceRoutes)
 app.use('/api/certifications',CertificationRoutes)
+app.use('/api/dashboard',dashboardRoutes)
+
+
 // app.js
 
 

@@ -13,6 +13,8 @@ import EnrolledCourses from './components/pages/EnrolledCourses'; // Import Enro
 import LearningPathTable from './components/pages/LearningPathTable';
 import MyPerformance from './components/pages/MyPerformance';
 import IssueCertification from './components/Admin/IssueCertification';
+import MyCertification from './components/pages/MyCertification';
+import Dashboard from './components/pages/Dashboard';
 
 
 const ProtectedRoute = ({ children }) => {
@@ -47,7 +49,8 @@ const App = () => {
             <Route path="enrolled-courses" element={<EnrolledCourses />} />
             <Route path="my-performance"   element={<MyPerformance/>} />
             <Route path="performance-learningpaths"   element={<LearningPathTable/>} />
-
+            <Route path="my-certification"   element={<MyCertification/>} />
+            <Route path="dashboard"   element={<Dashboard/>} />
           </Route>
 
           {/* Admin Routes */}

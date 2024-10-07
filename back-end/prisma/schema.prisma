@@ -3,6 +3,7 @@
 
 // Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
 // Prisma schema with auto-incrementing integer primary keys
 
 datasource db {
@@ -27,15 +28,14 @@ model User {
   certificates       Certificates[]        
 }
 
-
-  model Course {
-    id                 Int                  @id @default(autoincrement())
-    title              String               @unique
-    duration           Int
-    difficulty_level   String
-    courseAssignments  CourseAssignment[]
-    learningPaths      CourseLearningPath[]  // Many-to-many relationship with Learning Paths
-  }
+model Course {
+  id                 Int                  @id @default(autoincrement())
+  title              String               @unique
+  duration           Int
+  difficulty_level   String
+  courseAssignments  CourseAssignment[]   
+  learningPaths      CourseLearningPath[] // Many-to-many relationship with Learning Paths
+}
 
 model CourseAssignment {
   id               Int                  @id @default(autoincrement())
@@ -53,7 +53,6 @@ model CourseAssignment {
   engagement_score Int?                 // Measure of engagement (forum participation, interaction)
   assignment_grade Int?                 // Grade received for assignments/projects
 }
-
 
 model PerformanceRating {
   id             Int              @id @default(autoincrement())
@@ -75,22 +74,22 @@ model PerformanceSummary {
   @@unique([user_id, learning_path_id])  // Ensure unique combination of user and learning path
 }
 
-
 model Certificates {
   id             Int             @id @default(autoincrement())
-  is_certified   Boolean
+  is_certified   Boolean         @default(false) // Set default value to false
   assignment_id  Int             @unique
   courseAssignment CourseAssignment @relation(fields: [assignment_id], references: [id], onDelete: Cascade)
   user_id        Int
   user           User            @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  image          Bytes?          // To store the image as bytes (optional)
 }
 
 model LearningPath {
-  id          Int                  @id @default(autoincrement())
-  title       String
-  description String?
-  created_at  DateTime              @default(now())
-  courses     CourseLearningPath[]  // Many-to-many relationship with courses
+  id               Int                  @id @default(autoincrement())
+  title            String
+  description      String?
+  created_at       DateTime             @default(now())
+  courses          CourseLearningPath[]  // Many-to-many relationship with courses
   performanceSummaries PerformanceSummary[] // Relation to performance summaries
 }
 

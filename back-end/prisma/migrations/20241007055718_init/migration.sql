@@ -59,9 +59,10 @@ CREATE TABLE "PerformanceSummary" (
 -- CreateTable
 CREATE TABLE "Certificates" (
     "id" SERIAL NOT NULL,
-    "is_certified" BOOLEAN NOT NULL,
+    "is_certified" BOOLEAN NOT NULL DEFAULT false,
     "assignment_id" INTEGER NOT NULL,
     "user_id" INTEGER NOT NULL,
+    "image" BYTEA,
 
     CONSTRAINT "Certificates_pkey" PRIMARY KEY ("id")
 );

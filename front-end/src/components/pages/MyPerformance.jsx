@@ -12,7 +12,7 @@ const MyPerformance = () => {
   useEffect(() => {
     const fetchLearningPaths = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/learning-paths`); // Adjust this endpoint accordingly
+        const response = await axios.get('http://localhost:5000/api/learning-paths'); // Adjust this endpoint accordingly
         setLearningPaths(response.data); // Assuming this returns an array of learning paths
       } catch (error) {
         console.error('Failed to fetch learning paths:', error);
@@ -33,7 +33,10 @@ const MyPerformance = () => {
       }
     };
 
-    fetchPerformanceData();
+    // Fetch performance data only if userId is available
+    if (userId) {
+      fetchPerformanceData();
+    }
   }, [userId, selectedLearningPath]); // Fetch data whenever the learning path changes
 
   if (loading) {
@@ -64,6 +67,8 @@ const MyPerformance = () => {
           <thead className="bg-blue-600 text-white">
             <tr>
               <th className="py-3 px-6 text-left text-sm font-semibold">Course Title</th>
+              <th className="py-3 px-6 text-left text-sm font-semibold">Duration (hrs)</th>
+              <th className="py-3 px-6 text-left text-sm font-semibold">Difficulty Level</th>
               <th className="py-3 px-6 text-left text-sm font-semibold">Rating</th>
             </tr>
           </thead>
@@ -71,18 +76,18 @@ const MyPerformance = () => {
             {performanceData.length > 0 ? (
               performanceData.map((course, index) => (
                 <tr
-                  key={index}
-                  className={`${
-                    index % 2 === 0 ? 'bg-gray-50' : 'bg-white'
-                  } hover:bg-gray-100`}
+                  key={course.id} // Using course.id as the key for better uniqueness
+                  className={`${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'} hover:bg-gray-100`}
                 >
-                  <td className="py-4 px-6 text-sm font-medium text-gray-700">{course.courseTitle}</td>
+                  <td className="py-4 px-6 text-sm font-medium text-gray-700">{course.title}</td>
+                  <td className="py-4 px-6 text-sm font-medium text-gray-700">{course.duration}</td>
+                  <td className="py-4 px-6 text-sm font-medium text-gray-700">{course.difficulty_level}</td>
                   <td className="py-4 px-6 text-sm font-medium text-gray-700">{course.rating}</td>
                 </tr>
               ))
             ) : (
               <tr>
-                <td colSpan="2" className="py-4 px-6 text-center text-sm text-gray-500">
+                <td colSpan="4" className="py-4 px-6 text-center text-sm text-gray-500">
                   No performance data available.
                 </td>
               </tr>
