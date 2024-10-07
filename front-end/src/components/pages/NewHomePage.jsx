@@ -30,6 +30,16 @@ const NewHomePage = () => {
               Enrolled Courses
             </Link>
           </li>
+          <li className="mb-4">
+            <Link to="/employee-home/my-performance" className="hover:text-blue-300">
+              My Performance
+            </Link>
+          </li>
+          <li className="mb-4">
+            <Link to="/employee-home/performance-learningpaths" className="hover:text-blue-300">
+              Learning Performance
+            </Link>
+          </li>
         </ul>
         {/* Logout Button */}
         <button

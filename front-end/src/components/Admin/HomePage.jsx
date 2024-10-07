@@ -15,7 +15,7 @@ const HomePage = () => {
   return (
     <div className="flex min-h-screen bg-gray-100">
       {/* Sidebar */}
-      <div className="w-64 bg-blue-600 p-5 text-white">
+      <div className="fixed w-64 bg-blue-600 h-full p-5 text-white">
         <h1 className="text-2xl font-bold mb-6">Course Management</h1>
         <ul>
           <li className="mb-4">
@@ -54,7 +54,7 @@ const HomePage = () => {
       </div>
 
       {/* Main content */}
-      <div className="flex-1 p-10">
+      <div className="flex-1 ml-64 p-10">
         <h2 className="text-3xl font-bold">Welcome to the Course Management System</h2>
         
         {/* Outlet for nested routes */}
