@@ -59,7 +59,7 @@ exports.assignCourse = async (req, res) => {
       return res.status(400).json({ error: 'Course is already assigned to this employee.' });
     }
 
-    // Create a new assignment
+    // Create a new course assignment
     const assignment = await prisma.courseAssignment.create({
       data: {
         user_id: parseInt(userId),
@@ -68,7 +68,7 @@ exports.assignCourse = async (req, res) => {
       },
     });
 
-    // Create a new PerformanceRating with default rating of 0
+    // Create a new PerformanceRating with a default rating of 0
     await prisma.performanceRating.create({
       data: {
         rating: 0, // Default rating is 0
@@ -77,38 +77,47 @@ exports.assignCourse = async (req, res) => {
       },
     });
 
-    //create a new performance summary with default average rating is 0
-    const {learning_path_id} = await prisma.courseLearningPath.findFirst(
-      {
-        where:{
-          course_id:parseInt(courseId)
-        }
-      }
-    )
-    console.log(learning_path_id)
+    // Create a new certificate with is_certified set to false
+    await prisma.certificates.create({
+      data: {
+        is_certified: false,  // Set certification status to false initially
+        assignment_id: assignment.id,  // Link to the course assignment
+        user_id: parseInt(userId),  // Link to the user
+      },
+    });
 
-    const getPerformanceSummary = await prisma.performanceSummary.findFirst(
-      {
-        where:{
-          user_id:parseInt(userId),
-          learning_path_id: parseInt(learning_path_id)
-        }
-      }
-    )
-   console.log(getPerformanceSummary)
-   if(!getPerformanceSummary)
-   {
-    await prisma.performanceSummary.create(
-      {
-        data:{
-         user_id:parseInt(userId),
-         average_rating:0,
-         learning_path_id:parseInt(learning_path_id)
-        }
-      }
-    )
-    console.log("sucess bro")
-   }
+    // Find the associated learning path for the course
+    const { learning_path_id } = await prisma.courseLearningPath.findFirst({
+      where: {
+        course_id: parseInt(courseId),
+      },
+    });
+
+    console.log(learning_path_id);
+
+    // Check if a performance summary already exists for this user and learning path
+    const getPerformanceSummary = await prisma.performanceSummary.findFirst({
+      where: {
+        user_id: parseInt(userId),
+        learning_path_id: parseInt(learning_path_id),
+      },
+    });
+
+    console.log(getPerformanceSummary);
+
+    // If no performance summary exists, create one with an average rating of 0
+    if (!getPerformanceSummary) {
+      await prisma.performanceSummary.create({
+        data: {
+          user_id: parseInt(userId),
+          average_rating: 0, // Default average rating is 0
+          learning_path_id: parseInt(learning_path_id),
+        },
+      });
+      console.log("Performance summary created successfully.");
+    }
+
+    // Send the newly created assignment as a response
     res.json(assignment);
   } catch (error) {
     console.error('Error assigning course:', error);

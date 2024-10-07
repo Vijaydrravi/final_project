@@ -40,6 +40,11 @@ const NewHomePage = () => {
               Learning Performance
             </Link>
           </li>
+          <li className="mb-4">
+            <Link to="/employee-home/my-certification" className="hover:text-blue-300">
+              My Certification
+            </Link>
+          </li>
         </ul>
         {/* Logout Button */}
         <button

@@ -12,6 +12,9 @@ import ViewCourses from './components/admin/ViewCourses';
 import EnrolledCourses from './components/pages/EnrolledCourses'; // Import Enrolled Courses component
 import LearningPathTable from './components/pages/LearningPathTable';
 import MyPerformance from './components/pages/MyPerformance';
+import IssueCertification from './components/Admin/IssueCertification';
+
+
 const ProtectedRoute = ({ children }) => {
   const { token } = useAuth();
   return token ? children : <Navigate to="/login" />;
@@ -44,6 +47,7 @@ const App = () => {
             <Route path="enrolled-courses" element={<EnrolledCourses />} />
             <Route path="my-performance"   element={<MyPerformance/>} />
             <Route path="performance-learningpaths"   element={<LearningPathTable/>} />
+
           </Route>
 
           {/* Admin Routes */}
@@ -56,6 +60,7 @@ const App = () => {
             <Route path="assign-course" element={<AssignCourse />} />
             <Route path="add-learning-path" element={<AddLearningPath />} />
             <Route path="view-courses" element={<ViewCourses />} />
+            <Route path="issue-certification"   element={<IssueCertification/>} />
           </Route>
 
           {/* Redirect all other paths to login */}

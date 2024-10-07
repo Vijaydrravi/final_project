@@ -43,6 +43,11 @@ const HomePage = () => {
               View Courses
             </Link>
           </li>
+          <li className="mb-4">
+            <Link to="/dashboard/issue-certification" className="hover:text-blue-300">
+              Issue Certificate
+            </Link>
+          </li>
         </ul>
         {/* Logout Button */}
         <button
