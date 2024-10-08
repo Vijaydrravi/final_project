@@ -10,8 +10,8 @@ const AssignCourse = () => {
   const [selectedCourse, setSelectedCourse] = useState('');
   const [selectedEmployee, setSelectedEmployee] = useState('');
 
+  // Fetch learning paths
   useEffect(() => {
-    // Fetch all learning paths
     const fetchLearningPaths = async () => {
       const response = await fetch('http://localhost:5000/api/learning-paths');
       const data = await response.json();
@@ -20,20 +20,22 @@ const AssignCourse = () => {
     fetchLearningPaths();
   }, []);
 
+  // Fetch courses based on selected learning path
   useEffect(() => {
     if (selectedLearningPath) {
-      // Fetch courses based on the selected learning path
       const fetchCourses = async () => {
         const response = await fetch(`http://localhost:5000/api/courses/${selectedLearningPath}`);
         const data = await response.json();
         setCourses(data);
       };
       fetchCourses();
+    } else {
+      setCourses([]); // Reset courses when learning path is not selected
     }
   }, [selectedLearningPath]);
 
+  // Fetch all employees
   useEffect(() => {
-    // Fetch all employees with role 'employee'
     const fetchEmployees = async () => {
       const response = await fetch('http://localhost:5000/api/employees');
       const data = await response.json();
@@ -42,6 +44,7 @@ const AssignCourse = () => {
     fetchEmployees();
   }, []);
 
+  // Handle course assignment
   const handleAssignCourse = async (e) => {
     e.preventDefault();
 
@@ -57,10 +60,14 @@ const AssignCourse = () => {
     });
 
     if (response.ok) {
-      toast.success('Course assigned successfully'); // Success notification
+      toast.success('Course assigned successfully');
+      // Reset the form fields
+      setSelectedLearningPath('');
+      setSelectedCourse('');
+      setSelectedEmployee('');
     } else {
       const errorResponse = await response.json();
-      toast.error(errorResponse.error || 'Failed to assign course'); // Error notification
+      toast.error(errorResponse.error || 'Failed to assign course');
     }
   };
 

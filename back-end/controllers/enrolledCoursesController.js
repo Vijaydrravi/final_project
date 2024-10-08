@@ -51,7 +51,16 @@ async function updateEnrolledCourse(req, res) {
             where: {
                 id: parseInt(courseId), // Ensure you're targeting the right course assignment
             },
+            include: {
+                certificates: true, // Include certificates to check if user is certified
+            },
         });
+
+        // Check if the user has been certified for this course
+        const isCertified = currentCourse.certificates.some(cert => cert.is_certified);
+        if (isCertified) {
+            return res.status(400).json({ error: "User is certified, cannot update course." });
+        }
 
         // Check if the course is already completed
         if (currentCourse.progress === 100) {
@@ -86,15 +95,12 @@ async function updateEnrolledCourse(req, res) {
             },
         });
 
-        
-       // find learningpath
-       const {learning_path_id} = await prisma.courseLearningPath.findFirst(
-        {
-            where:{
-                course_id:currentCourse.course_id
+        // Find the learning path
+        const { learning_path_id } = await prisma.courseLearningPath.findFirst({
+            where: {
+                course_id: currentCourse.course_id
             }
-        }
-       )
+        });
 
         // Fetch all performance ratings for the user and learning path
         const ratings = await prisma.performanceRating.findMany({
@@ -110,16 +116,11 @@ async function updateEnrolledCourse(req, res) {
             },
             select: { rating: true },
         });
-        console.log(ratings)
-
 
         // Calculate the new average rating
-
         const totalRatings = ratings.reduce((sum, rating) => sum + rating.rating, 0);
-        const averageRating = totalRatings / ratings.length;
-        console.log(averageRating)
-        console.log(currentCourse.user_id)
-        
+        const averageRating = ratings.length > 0 ? totalRatings / ratings.length : 0;
+
         // Update the PerformanceSummary with the new average rating
         const performanceSummary = await prisma.performanceSummary.findFirst({
             where: {             
@@ -130,7 +131,7 @@ async function updateEnrolledCourse(req, res) {
 
         // Check if the performance summary exists
         if (performanceSummary) {
-            const updatedSummary = await prisma.performanceSummary.update({
+            await prisma.performanceSummary.update({
                 where: {
                     id: performanceSummary.id, // Use the found summary's ID directly
                 },
@@ -140,8 +141,6 @@ async function updateEnrolledCourse(req, res) {
             });
         }
 
-        // Update the performance summary
- 
         res.status(200).json(updatedCourse); // Return the updated course assignment
     } catch (error) {
         console.error("Error updating enrolled course:", error);

@@ -152,34 +152,36 @@ const getUserDetails = async (assignmentId) => {
 
 // Controller function to fetch certificates for a specific user
 const getCertificates = async (req, res) => {
-    const userId = parseInt(req.params.userId); // Get user ID from route params
-    console.log(userId)
-    try {
-        const certificates = await prisma.certificates.findMany({
-            where: {
-                user_id: userId,
-                is_certified: true, // Only fetch certified certificates
-            },
-            include: {
-                courseAssignment: {
-                    include: {
-                        course: true, // Include course details
-                    },
-                },
-            },
-        });
+  const userId = parseInt(req.params.userId); // Get user ID from route params
+  console.log(userId);
 
-        // Check if certificates were found
-        if (certificates.length === 0) {
-            return res.status(404).json({ message: "No certified certificates found for this user." });
-        }
+  try {
+      const certificates = await prisma.certificates.findMany({
+          where: {
+              user_id: userId,
+              is_certified: true, // Only fetch certified certificates
+          },
+          include: {
+              courseAssignment: {
+                  include: {
+                      course: true, // Include course details
+                  },
+              },
+          },
+      });
 
-        res.status(200).json(certificates); // Return the certificates
-    } catch (error) {
-        console.error("Error fetching certificates:", error);
-        res.status(500).json({ error: "Failed to fetch certificates" });
-    }
+      // If no certificates are found, return an empty array
+      if (certificates.length === 0) {
+          return res.status(200).json({ message: "No certified certificates found for this user.", data: [] });
+      }
+
+      res.status(200).json({ data: certificates }); // Return the certificates in the 'data' field
+  } catch (error) {
+      console.error("Error fetching certificates:", error);
+      res.status(500).json({ error: "Failed to fetch certificates" });
+  }
 };
+
 
 
 module.exports = {

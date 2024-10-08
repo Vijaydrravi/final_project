@@ -6,7 +6,7 @@ import SignUp from './components/pages/SignUp';
 import HomePage from './components/Admin/HomePage';
 import NewHomePage from './components/pages/NewHomePage'; // Import Employee Home Page
 import AddCourse from './components/Admin/AddCourse';
-import AssignCourse from './components/admin/AssignCourse';
+import AssignCourse from './components/Admin/AssignCourse';
 import AddLearningPath from './components/Admin/AddLearningPath';
 import ViewCourses from './components/admin/ViewCourses';
 import EnrolledCourses from './components/pages/EnrolledCourses'; // Import Enrolled Courses component
@@ -15,7 +15,8 @@ import MyPerformance from './components/pages/MyPerformance';
 import IssueCertification from './components/Admin/IssueCertification';
 import MyCertification from './components/pages/MyCertification';
 import Dashboard from './components/pages/Dashboard';
-
+import EmployeeTable from './components/Admin/EmployeeTable';
+import EmployeeProfile from './components/Admin/EmployeeProfile';
 
 const ProtectedRoute = ({ children }) => {
   const { token } = useAuth();
@@ -47,10 +48,10 @@ const App = () => {
             </ProtectedRoute>
           }>
             <Route path="enrolled-courses" element={<EnrolledCourses />} />
-            <Route path="my-performance"   element={<MyPerformance/>} />
-            <Route path="performance-learningpaths"   element={<LearningPathTable/>} />
-            <Route path="my-certification"   element={<MyCertification/>} />
-            <Route path="dashboard"   element={<Dashboard/>} />
+            <Route path="my-performance"   element={<MyPerformance />} />
+            <Route path="performance-learningpaths"   element={<LearningPathTable />} />
+            <Route path="my-certification"   element={<MyCertification />} />
+            <Route path="dashboard"   element={<Dashboard />} />
           </Route>
 
           {/* Admin Routes */}
@@ -63,7 +64,9 @@ const App = () => {
             <Route path="assign-course" element={<AssignCourse />} />
             <Route path="add-learning-path" element={<AddLearningPath />} />
             <Route path="view-courses" element={<ViewCourses />} />
-            <Route path="issue-certification"   element={<IssueCertification/>} />
+            <Route path="issue-certification" element={<IssueCertification />} />
+            <Route path="employee-performance" element={<EmployeeTable />} />
+            <Route path="employee-performance/:id" element={<EmployeeProfile />} /> {/* Add Employee Profile Route */}
           </Route>
 
           {/* Redirect all other paths to login */}

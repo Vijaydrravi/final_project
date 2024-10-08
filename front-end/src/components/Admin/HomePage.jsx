@@ -48,6 +48,11 @@ const HomePage = () => {
               Issue Certificate
             </Link>
           </li>
+          <li className="mb-4">
+            <Link to="/dashboard/employee-performance" className="hover:text-blue-300">
+              Employee Performance
+            </Link>
+          </li>
         </ul>
         {/* Logout Button */}
         <button

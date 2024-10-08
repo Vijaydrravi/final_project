@@ -4,7 +4,7 @@ import axios from 'axios';
 const MyCertification = () => {
     const [certificates, setCertificates] = useState([]);
     const [error, setError] = useState(null);
-    
+
     // Retrieve userId from localStorage
     const userId = localStorage.getItem('userId');
 
@@ -13,8 +13,9 @@ const MyCertification = () => {
             try {
                 const response = await axios.get(`http://localhost:5000/api/certifications/my-certificates/${userId}`);
                 console.log(response.data); // Log the entire response to check structure
-                const certifiedCertificates = response.data.filter(cert => cert.is_certified);
-                setCertificates(certifiedCertificates);
+
+                // The API now returns a 'data' field, whether certificates are available or not
+                setCertificates(response.data.data); // Access the 'data' field
             } catch (err) {
                 setError('Failed to fetch certificates');
                 console.error(err);
@@ -136,16 +137,3 @@ const MyCertification = () => {
 };
 
 export default MyCertification;
-
-
-// import React from 'react'
-
-// const MyCertification = () => {
-//   return (
-//     <div>
-      
-//     </div>
-//   )
-// }
-
-// export default MyCertification
