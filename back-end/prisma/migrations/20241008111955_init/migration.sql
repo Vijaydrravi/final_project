@@ -28,8 +28,6 @@ CREATE TABLE "CourseAssignment" (
     "progress" INTEGER NOT NULL,
     "assignment_date" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "quiz_score" DOUBLE PRECISION,
-    "interaction_time" DOUBLE PRECISION,
-    "completion_time" INTEGER,
     "engagement_score" INTEGER,
     "assignment_grade" INTEGER,
 

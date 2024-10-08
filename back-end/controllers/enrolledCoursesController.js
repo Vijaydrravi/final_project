@@ -81,9 +81,9 @@ async function updateEnrolledCourse(req, res) {
         });
 
         // Calculate the performance rating
-        const performanceRating = (progress * 0.4) + (quiz_score * 0.25) + 
-                                  (assignment_grade * 0.25) + 
-                                  (engagement_score * 0.1);
+        const performanceRating = (progress * 0.15) + (quiz_score * 0.35) + 
+                                  (assignment_grade * 0.35) + 
+                                  (engagement_score * 0.15);
 
         // Update the PerformanceRating record
         await prisma.performanceRating.update({

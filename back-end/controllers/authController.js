@@ -4,12 +4,25 @@ const { PrismaClient } = require('@prisma/client');
 
 const prisma = new PrismaClient();
 
-// Signup handler
 const signup = async (req, res) => {
   const { email, password, designation, name } = req.body;
 
   try {
+    // Check for existing user with the same email
+    const existingUser = await prisma.user.findUnique({
+      where: {
+        email,
+      },
+    });
+
+    if (existingUser) {
+      return res.status(400).json({ error: 'Email already in use' });
+    }
+
+    // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Create the new user
     await prisma.user.create({
       data: {
         email,
@@ -18,6 +31,7 @@ const signup = async (req, res) => {
         name,
       },
     });
+
     res.status(201).json({ message: 'User created successfully' });
   } catch (error) {
     console.error(error); // Log the error for debugging
@@ -25,6 +39,7 @@ const signup = async (req, res) => {
   }
 };
 
+module.exports = { signup };
 // Login handler
 const login = async (req, res) => {
   const { email, password } = req.body;
