@@ -4,6 +4,8 @@ import axios from 'axios';
 const MyCertification = () => {
     const [certificates, setCertificates] = useState([]);
     const [error, setError] = useState(null);
+    const [currentPage, setCurrentPage] = useState(1); // Current page
+    const [certificatesPerPage] = useState(8); // Number of certificates per page
 
     // Retrieve userId from localStorage
     const userId = localStorage.getItem('userId');
@@ -14,7 +16,6 @@ const MyCertification = () => {
                 const response = await axios.get(`http://localhost:5000/api/certifications/my-certificates/${userId}`);
                 console.log(response.data); // Log the entire response to check structure
 
-                // The API now returns a 'data' field, whether certificates are available or not
                 setCertificates(response.data.data); // Access the 'data' field
             } catch (err) {
                 setError('Failed to fetch certificates');
@@ -36,12 +37,10 @@ const MyCertification = () => {
             return;
         }
 
-        // Convert Buffer to Base64 string if image is an object
         let imgSrc;
         if (image && typeof image === 'object' && image.type === 'Buffer') {
             imgSrc = `data:image/png;base64,${arrayBufferToBase64(image.data)}`;
         } else if (typeof image === 'string') {
-            // Ensure it starts with the correct data URL prefix
             imgSrc = image.startsWith('data:image/png;base64,') ? image : `data:image/png;base64,${image}`;
         } else {
             console.error('Invalid image format:', image);
@@ -52,7 +51,6 @@ const MyCertification = () => {
     };
 
     const arrayBufferToBase64 = (buffer) => {
-        // Convert the ArrayBuffer to Base64
         return btoa(
             new Uint8Array(buffer).reduce((data, byte) => data + String.fromCharCode(byte), '')
         );
@@ -67,17 +65,17 @@ const MyCertification = () => {
                     <style>
                         body {
                             display: flex;
-                            justify-content: center; /* Center horizontally */
-                            align-items: center; /* Center vertically */
-                            height: 100vh; /* Full viewport height */
-                            margin: 0; /* Remove default margin */
-                            background-color: #f0f0f0; /* Optional background color */
+                            justify-content: center;
+                            align-items: center;
+                            height: 100vh;
+                            margin: 0;
+                            background-color: #f0f0f0;
                         }
                         img {
-                            max-width: 90%; /* Adjust max width as needed */
-                            height: auto; /* Maintain aspect ratio */
-                            border: 5px solid #4B0082; /* Optional border around the image */
-                            border-radius: 10px; /* Optional rounded corners */
+                            max-width: 90%;
+                            height: auto;
+                            border: 5px solid #4B0082;
+                            border-radius: 10px;
                         }
                     </style>
                 </head>
@@ -86,8 +84,14 @@ const MyCertification = () => {
                 </body>
             </html>
         `);
-        newWindow.document.close(); // Close the document to render the content
+        newWindow.document.close();
     };
+
+    // Pagination logic
+    const indexOfLastCert = currentPage * certificatesPerPage;
+    const indexOfFirstCert = indexOfLastCert - certificatesPerPage;
+    const currentCertificates = certificates.slice(indexOfFirstCert, indexOfLastCert);
+    const totalPages = Math.ceil(certificates.length / certificatesPerPage);
 
     if (error) {
         return <div>{error}</div>;
@@ -95,8 +99,8 @@ const MyCertification = () => {
 
     return (
         <div className="overflow-x-auto mt-4">
-            <h2 className='text-2xl text-center mt-10'>My Certifications</h2>
-            <table className="min-w-full table-auto bg-white border border-gray-200 shadow-md rounded-lg mt-10">
+            <h2 className='text-2xl text-center mt-5 font-bold'>My Certifications</h2>
+            <table className="min-w-full table-auto bg-white border border-gray-200 shadow-md rounded-lg mt-5">
                 <thead className="bg-blue-600 text-white">
                     <tr>
                         <th className="py-3 px-6 text-left text-sm font-semibold">Course Title</th>
@@ -104,17 +108,17 @@ const MyCertification = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {certificates.length > 0 ? (
-                        certificates.map((cert, index) => (
+                    {currentCertificates.length > 0 ? (
+                        currentCertificates.map((cert, index) => (
                             <tr
                                 key={cert.assignment_id}
                                 className={`${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'} hover:bg-gray-100`}
                             >
-                                <td className="py-4 px-6 text-sm font-medium text-gray-700 ">
+                                <td className="py-4 px-6 text-sm font-medium text-gray-700">
                                     {cert.courseAssignment.course.title}
                                 </td>
                                 <td className="py-4 px-6 text-sm font-medium ">
-                                    <button 
+                                    <button
                                         className="text-green-600 hover:text-green-800 font-semibold"
                                         onClick={() => handleViewCertificate(cert.image)}
                                     >
@@ -132,6 +136,27 @@ const MyCertification = () => {
                     )}
                 </tbody>
             </table>
+
+            {/* Pagination Controls */}
+            <div className="flex justify-between items-center mt-4">
+                <button
+                    onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+                    disabled={currentPage === 1}
+                    className="p-2 border border-gray-300 rounded disabled:opacity-50"
+                >
+                    Previous
+                </button>
+                <span>
+                    Page {currentPage} of {totalPages}
+                </span>
+                <button
+                    onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+                    disabled={currentPage === totalPages}
+                    className="p-2 border border-gray-300 rounded disabled:opacity-50"
+                >
+                    Next
+                </button>
+            </div>
         </div>
     );
 };

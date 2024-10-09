@@ -6,6 +6,8 @@ const MyPerformance = () => {
   const [loading, setLoading] = useState(true);
   const [learningPaths, setLearningPaths] = useState([]);
   const [selectedLearningPath, setSelectedLearningPath] = useState('all'); // Default to show all
+  const [currentPage, setCurrentPage] = useState(1); // Current page
+  const [coursesPerPage] = useState(7); // Number of courses per page
 
   const userId = localStorage.getItem('userId'); // Assuming the user ID is stored in localStorage
 
@@ -43,16 +45,25 @@ const MyPerformance = () => {
     return <p className="text-center mt-6">Loading...</p>;
   }
 
+  // Pagination logic
+  const indexOfLastCourse = currentPage * coursesPerPage;
+  const indexOfFirstCourse = indexOfLastCourse - coursesPerPage;
+  const currentCourses = performanceData.slice(indexOfFirstCourse, indexOfLastCourse);
+  const totalPages = Math.ceil(performanceData.length / coursesPerPage);
+
   return (
     <div className="container mx-auto p-6">
-      <h2 className="text-3xl font-bold mb-6 text-center">My Performance</h2>
+      <p className="text-2xl font-bold mb-4 text-center ">My Performance</p>
 
       {/* Dropdown for Learning Paths */}
       <div className="mb-4">
         <label className="block text-sm font-semibold mb-2">Select Learning Path:</label>
         <select 
           value={selectedLearningPath} 
-          onChange={(e) => setSelectedLearningPath(e.target.value)} 
+          onChange={(e) => {
+            setSelectedLearningPath(e.target.value);
+            setCurrentPage(1); // Reset to the first page on path change
+          }} 
           className="p-2 border border-gray-300 rounded"
         >
           <option value="all">All Learning Paths</option>
@@ -73,8 +84,8 @@ const MyPerformance = () => {
             </tr>
           </thead>
           <tbody>
-            {performanceData.length > 0 ? (
-              performanceData.map((course, index) => (
+            {currentCourses.length > 0 ? (
+              currentCourses.map((course, index) => (
                 <tr
                   key={course.id} // Using course.id as the key for better uniqueness
                   className={`${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'} hover:bg-gray-100`}
@@ -94,6 +105,27 @@ const MyPerformance = () => {
             )}
           </tbody>
         </table>
+      </div>
+
+      {/* Pagination Controls */}
+      <div className="flex justify-between items-center mt-4">
+        <button 
+          onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+          disabled={currentPage === 1}
+          className="p-2 border border-gray-300 rounded disabled:opacity-50"
+        >
+          Previous
+        </button>
+        <span>
+          Page {currentPage} of {totalPages}
+        </span>
+        <button 
+          onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+          disabled={currentPage === totalPages}
+          className="p-2 border border-gray-300 rounded disabled:opacity-50"
+        >
+          Next
+        </button>
       </div>
     </div>
   );
