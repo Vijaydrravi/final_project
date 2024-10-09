@@ -50,8 +50,8 @@ exports.assignCourse = async (req, res) => {
     // Check if the course is already assigned to the employee
     const existingAssignment = await prisma.courseAssignment.findFirst({
       where: {
-        user_id: parseInt(userId),
-        course_id: parseInt(courseId),
+        user_id: parseInt(userId), // Simple direct comparison
+        course_id: parseInt(courseId), // Simple direct comparison
       },
     });
 
@@ -87,13 +87,17 @@ exports.assignCourse = async (req, res) => {
     });
 
     // Find the associated learning path for the course
-    const { learning_path_id } = await prisma.courseLearningPath.findFirst({
+    const courseLearningPath = await prisma.courseLearningPath.findFirst({
       where: {
         course_id: parseInt(courseId),
       },
     });
 
-    console.log(learning_path_id);
+    if (!courseLearningPath) {
+      return res.status(404).json({ error: 'Learning path not found for this course.' });
+    }
+
+    const { learning_path_id } = courseLearningPath;
 
     // Check if a performance summary already exists for this user and learning path
     const getPerformanceSummary = await prisma.performanceSummary.findFirst({
@@ -102,8 +106,6 @@ exports.assignCourse = async (req, res) => {
         learning_path_id: parseInt(learning_path_id),
       },
     });
-
-    console.log(getPerformanceSummary);
 
     // If no performance summary exists, create one with an average rating of 0
     if (!getPerformanceSummary) {

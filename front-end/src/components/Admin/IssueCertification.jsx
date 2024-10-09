@@ -29,15 +29,10 @@ const IssueCertification = () => {
       const response = await axios.post(`http://localhost:5000/api/certifications/approve/${assignmentId}`);
       toast.success("Certification approved successfully!");
 
-      // Update the user with the new certification data
-      const updatedUser = {
-        ...users.find((user) => user.id === assignmentId),
-        certificates: { ...response.data.certification } // Add the newly generated certificate data
-      };
-
+      // Update the user list to remove the approved user
       setUsers((prevUsers) => 
-        prevUsers.map((user) => (user.id === assignmentId ? updatedUser : user))
-      ); // Update the specific user with the new data
+        prevUsers.filter((user) => user.id !== assignmentId)
+      );
       
     } catch (error) {
       console.error("Error approving certificate:", error);
@@ -54,8 +49,8 @@ const IssueCertification = () => {
       ) : users.length === 0 ? (
         <p>No users are eligible for certification.</p>
       ) : (
-        <table className="min-w-full bg-white">
-          <thead>
+        <table className="min-w-full bg-white border border-gray-200 shadow-md rounded-lg mt-5">
+          <thead className="bg-blue-600 text-white">
             <tr>
               <th className="px-4 py-2">Employee Name</th>
               <th className="px-4 py-2">Course Name</th>
@@ -65,7 +60,7 @@ const IssueCertification = () => {
           </thead>
           <tbody>
             {users.map((user) => (
-              <tr key={user.id}>
+              <tr key={user.id} className="border-b hover:bg-gray-100">
                 <td className="border px-4 py-2">{user.user.name}</td>
                 <td className="border px-4 py-2">{user.course.title}</td>
                 <td className="border px-4 py-2">
@@ -79,12 +74,8 @@ const IssueCertification = () => {
                     >
                       Approve
                     </button>
-                  ) : (
-                    <span className="text-green-600">
-                      Certified
-                      <a href={user.certificates.image} target="_blank" rel="noopener noreferrer" className="ml-2 text-blue-500">View Certificate</a>
-                    </span>
-                  )}
+                  ) : null /* No view certificate or certified text needed */
+                  }
                 </td>
               </tr>
             ))}

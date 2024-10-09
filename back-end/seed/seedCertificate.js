@@ -15,7 +15,6 @@ const ingestCertificatesFromCsv = async () => {
     .pipe(csv())
     .on('data', (row) => {
       certificates.push({
-        id: parseInt(row.id),  // Ensure it's an integer
         is_certified: row.is_certified.toLowerCase() === 'true',  // Convert to boolean
         assignment_id: parseInt(row.assignment_id),  // Ensure it's an integer
         user_id: parseInt(row.user_id),  // Ensure it's an integer

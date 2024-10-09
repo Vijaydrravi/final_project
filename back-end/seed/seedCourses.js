@@ -19,27 +19,20 @@ const seedCourses = async () => {
     .pipe(csv())
     .on('data', (row) => {
       courses.push({
-        id: parseInt(row.id),            // Course ID
-        title: row.title,                // Course title
-        duration: parseInt(row.duration),// Duration of the course in hours/minutes
-        difficulty_level: row.difficulty_level, // Difficulty level (Beginner, Intermediate, etc.)
+        title: row.title,                     // Course title
+        duration: parseInt(row.duration),     // Duration of the course in hours/minutes
+        difficulty_level: row.difficulty_level // Difficulty level (Beginner, Intermediate, etc.)
       });
     })
     .on('end', async () => {
       console.log('CSV file successfully processed');
 
       try {
-        // Ingest data into the database
-        for (const course of courses) {
-          await prisma.course.create({
-            data: {
-              id: course.id, // If you're manually specifying the ID
-              title: course.title,
-              duration: course.duration,
-              difficulty_level: course.difficulty_level,
-            },
-          });
-        }
+        // Ingest data into the database using createMany to avoid duplicates
+        await prisma.course.createMany({
+          data: courses,
+          skipDuplicates: true, // Skip any records that violate unique constraints
+        });
 
         console.log('Courses have been ingested successfully');
       } catch (error) {

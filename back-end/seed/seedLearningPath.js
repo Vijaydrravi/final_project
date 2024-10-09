@@ -13,7 +13,6 @@ const seedLearningPaths = async () => {
     .pipe(csv())
     .on('data', (row) => {
       learningPaths.push({
-        id: parseInt(row.id),
         title: row.title,
         description: row.description,
         created_at: new Date(row.created_at),
@@ -23,17 +22,11 @@ const seedLearningPaths = async () => {
       console.log('CSV file successfully processed');
 
       try {
-        // Ingest data into the database
-        for (const lp of learningPaths) {
-          await prisma.learningPath.create({
-            data: {
-              id: lp.id, // ID can auto-increment, but you're specifying it
-              title: lp.title,
-              description: lp.description,
-              created_at: lp.created_at,
-            },
-          });
-        }
+        // Ingest data into the database using createMany to avoid duplicates
+        await prisma.learningPath.createMany({
+          data: learningPaths,
+          skipDuplicates: true, // Skip any records that violate unique constraints
+        });
 
         console.log('Learning Paths have been ingested successfully');
       } catch (error) {
