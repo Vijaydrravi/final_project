@@ -1,17 +1,22 @@
 import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
-import { useAuth } from '../pages/AuthContext'; // Adjust the path if necessary
+import { useAuth } from '../pages/AuthContext' // Adjust the path if necessary
 import { useNavigate } from 'react-router-dom';
 import profileAdminImg from '../../assets/account.png';
 
-const NewHomePage = () => {
+const EmployeePage = () => {
   const { logout, user } = useAuth(); // Assuming `user` contains user details
   const navigate = useNavigate();
   const imgUrl = profileAdminImg;
 
-  const handleLogout = () => {
-    logout(); // Call the logout function
-    navigate('/login'); // Redirect to login page
+  const handleLogout = async () => {
+    try {
+      await logout(); // Call the logout function
+      navigate('/login'); // Redirect to login page
+    } catch (error) {
+      console.error("Logout failed", error);
+      // Optionally display an error message to the user
+    }
   };
 
   return (
@@ -21,7 +26,7 @@ const NewHomePage = () => {
         <h1 className="text-2xl font-bold mb-6">Course Management</h1>
         <ul>
           <li className="mb-4">
-            <Link to="/employee-home/dashboard  " className="hover:text-blue-300">
+            <Link to="/employee-home/dashboard" className="hover:text-blue-300">
               Dashboard
             </Link>
           </li>
@@ -50,6 +55,7 @@ const NewHomePage = () => {
         <button
           onClick={handleLogout}
           className="w-full bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded mt-6"
+          aria-label="Logout"
         >
           Logout
         </button>
@@ -78,5 +84,4 @@ const NewHomePage = () => {
   );
 };
 
-export default NewHomePage;
-    
+export default EmployeePage;

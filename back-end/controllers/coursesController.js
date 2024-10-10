@@ -45,7 +45,11 @@ exports.addCourse = async (req, res) => {
 
 exports.getCourses = async (req, res) => {
   try {
-    const courses = await prisma.course.findMany();
+    const courses = await prisma.course.findMany({
+      orderBy: {
+        id: 'asc', // Change this to 'desc' if you want descending order
+      },
+    });
     res.json(courses);
   } catch (error) {
     console.error('Error fetching courses:', error);
@@ -53,18 +57,41 @@ exports.getCourses = async (req, res) => {
   }
 };
 
-exports.updateCourse = async (req, res) => {
-  const { id } = req.params;
-  const { title } = req.body; // Only expect the title in the request body
 
+exports.editCourse = async (req, res) => {
+  const { id } = req.params;
+  const { title, duration, difficulty_level } = req.body;
+ console.log(req.params)
   try {
-    const updatedCourse = await prisma.course.update({
-      where: { id: parseInt(id) },
-      data: { title }, // Update only the title
+    // Check if the course exists
+    const courseExists = await prisma.course.findUnique({
+      where: { id: parseInt(id) }, // Ensure ID is an integer
     });
+
+    if (!courseExists) {
+      return res.status(404).json({ error: 'Course not found' });
+    }
+
+    // Convert duration to an integer
+    const durationInt = parseInt(duration, 10);
+
+    // Check if duration is a valid positive integer
+    if (!Number.isInteger(durationInt) || durationInt <= 0) {
+      return res.status(400).json({ error: 'Invalid duration provided' });
+    }
+
+    const updatedCourse = await prisma.course.update({
+      where: { id: parseInt(id) }, // Ensure ID is an integer
+      data: {
+        title,
+        duration: durationInt, // Use the converted integer duration
+        difficulty_level,
+      },
+    });
+
     res.json(updatedCourse);
   } catch (error) {
     console.error('Error updating course:', error);
-    res.status(500).json({ error: 'An error occurred while updating the course.' });
+    res.status(500).json({ error: 'Failed to update course' });
   }
 };

@@ -6,7 +6,7 @@ import { Doughnut, Bar } from 'react-chartjs-2';
 // Register the necessary components
 Chart.register(...registerables);
 
-const Dashboard = () => {
+const EmployeeDashboard = () => {
   const [dashboardData, setDashboardData] = useState({
     enrolledCourses: 0,
     completedCourses: 0,
@@ -83,31 +83,9 @@ const Dashboard = () => {
 
   return (
     <div className="mt-8">
-      <h2 className="text-xl font-bold mb-4">Dashboard</h2>
 
-      {/* Pie Chart */}
-      <div className="flex justify-center mb-8">
-        <div style={{ height: '35vh', width: '35vw' }} className="border rounded-lg shadow-lg p-4 bg-white">
-          <Doughnut data={pieChartData} />
-        </div>
-      </div>
-
-      {/* Bar Chart for Course Statistics */}
-      <div className="flex justify-center mb-8">
-        <div style={{ height: '35vh', width: '35vw' }} className="border rounded-lg shadow-lg p-4 bg-white">
-          <Bar data={barChartData} options={{ responsive: true }} />
-        </div>
-      </div>
-
-      {/* Bar Chart for Learning Path Performance */}
-      <div className="flex justify-center mb-8">
-        <div style={{ height: '35vh', width: '35vw' }} className="border rounded-lg shadow-lg p-4 bg-white">
-          <Bar data={learningPathBarChartData} options={{ responsive: true }} />
-        </div>
-      </div>
-
-      {/* Dashboard Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
+            {/* Dashboard Stats Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
         {/* Enrolled Courses Card */}
         <div className="bg-white shadow-md rounded-lg p-4">
           <h3 className="text-lg font-semibold text-gray-700">Enrolled Courses</h3>
@@ -132,8 +110,32 @@ const Dashboard = () => {
           <p className="text-2xl font-bold text-red-600">{dashboardData.totalPerformance.toFixed(2)}</p>
         </div>
       </div>
+      <h2 className="text-xl font-bold mb-4">Dashboard</h2>
+
+      {/* Pie Chart */}
+      <div className="flex justify-center mb-8">
+        <div style={{ height: '35vh', width: '35vw' }} className="border rounded-lg shadow-lg p-4 bg-white">
+          <Doughnut data={pieChartData} />
+        </div>
+      </div>
+
+      {/* Bar Chart for Course Statistics */}
+      <div className="flex justify-center mb-8">
+        <div style={{ height: '35vh', width: '35vw' }} className="border rounded-lg shadow-lg p-4 bg-white">
+          <Bar data={barChartData} options={{ responsive: true }} />
+        </div>
+      </div>
+
+      {/* Bar Chart for Learning Path Performance */}
+      <div className="flex justify-center mb-8">
+        <div style={{ height: '35vh', width: '35vw' }} className="border rounded-lg shadow-lg p-4 bg-white">
+          <Bar data={learningPathBarChartData} options={{ responsive: true }} />
+        </div>
+      </div>
+
+
     </div>
   );
 };
 
-export default Dashboard;
+export default EmployeeDashboard;

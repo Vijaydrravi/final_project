@@ -12,6 +12,7 @@ const learningPathPerformanceRoutes = require('./routes/learningPathPerformanceR
 const CertificationRoutes = require('./routes/CertificationRoutes')
 const dashboardRoutes = require('./routes/dashboardRoutes')
 const employeeRoutes = require('./routes/employeeRoutes')
+const adminDashboardRoutes = require('./routes/adminDashboardRoutes')
 
 
 const app = express();
@@ -41,6 +42,7 @@ app.use('/api/learningpath-performance',learningPathPerformanceRoutes)
 app.use('/api/certifications',CertificationRoutes)
 app.use('/api/dashboard',dashboardRoutes)
 app.use('/api/employee',employeeRoutes)
+app.use('/api/admin-dashboard',adminDashboardRoutes)
 
 // app.js
 

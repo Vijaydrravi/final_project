@@ -3,7 +3,7 @@ import { Link, Outlet } from 'react-router-dom';
 import { useAuth } from '../pages/AuthContext'; // Adjust the path if necessary
 import { useNavigate } from 'react-router-dom';
 
-const HomePage = () => {
+const AdminHomePage = () => {
   const { logout } = useAuth();
   const navigate = useNavigate();
 
@@ -19,7 +19,7 @@ const HomePage = () => {
         <h1 className="text-2xl font-bold mb-6">Course Management</h1>
         <ul>
           <li className="mb-4">
-            <Link to="/dashboard" className="hover:text-blue-300">
+            <Link to="/dashboard/admin-dashboard" className="hover:text-blue-300">
               Dashboard
             </Link>
           </li>
@@ -74,4 +74,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default AdminHomePage;

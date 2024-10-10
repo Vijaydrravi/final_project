@@ -6,32 +6,32 @@ import { useAuth } from './AuthContext';
 
 const Login = () => {
   const navigate = useNavigate();
-  const { login } = useAuth(); // Access login function from context
+  const { login } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     try {
       const response = await fetch('http://localhost:5000/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
       });
-  
+
       const data = await response.json();
-  
       if (response.ok) {
-        // Call login from AuthContext with token, role, and userId
-        login(data.token, data.role, data.userId); // Updated to include userId
-  
-        // Success toast
+        login(data.token, data.role, data.userId); // Include userId
+
         toast.success('Login successful! Redirecting to dashboard...');
-  
-        // Redirect to the dashboard after a short delay
+
         setTimeout(() => {
-          navigate('/dashboard');
+          if (data.role === 'admin') {
+            navigate('/dashboard/admin-dashboard');
+          } else {
+            navigate('/employee-home/dashboard');
+          }
         }, 2000);
       } else {
         toast.error(data.error || 'Login failed. Please try again.');
@@ -97,7 +97,6 @@ const Login = () => {
         </div>
       </div>
 
-      {/* ToastContainer to display notifications */}
       <ToastContainer />
     </div>
   );

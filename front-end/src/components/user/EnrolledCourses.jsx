@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useAuth } from './AuthContext'; // Adjust the path if necessary
+import { useAuth } from '../pages/AuthContext'; // Adjust the path if necessary
 import { toast, ToastContainer } from 'react-toastify'; // Import toast and ToastContainer
 import 'react-toastify/dist/ReactToastify.css'; // Import toastify CSS
 
