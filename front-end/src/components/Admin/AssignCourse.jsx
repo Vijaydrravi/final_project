@@ -74,7 +74,7 @@ const AssignCourse = () => {
   return (
     <div>
       <ToastContainer /> {/* Toast container for notifications */}
-      <h1 className="text-3xl font-bold">Assign Course</h1>
+      <h1 className="text-2xl font-bold mt-10 text-center mb-5">Assign Course</h1>
       <form onSubmit={handleAssignCourse}>
         {/* Select Learning Path */}
         <div>

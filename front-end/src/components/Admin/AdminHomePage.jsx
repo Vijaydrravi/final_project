@@ -2,10 +2,12 @@ import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import { useAuth } from '../pages/AuthContext'; // Adjust the path if necessary
 import { useNavigate } from 'react-router-dom';
+import profileAdminImg from '../../assets/account.png';
 
 const AdminHomePage = () => {
-  const { logout } = useAuth();
+  const { logout, userName } = useAuth(); // Assuming `user` contains user details
   const navigate = useNavigate();
+  const imgUrl = profileAdminImg;
 
   const handleLogout = () => {
     logout(); // Call the logout function
@@ -24,6 +26,11 @@ const AdminHomePage = () => {
             </Link>
           </li>
           <li className="mb-4">
+            <Link to="/dashboard/add-learning-path" className="hover:text-blue-300">
+              Add Learning Path
+            </Link>
+          </li>
+          <li className="mb-4">
             <Link to="/dashboard/add-course" className="hover:text-blue-300">
               Add Course
             </Link>
@@ -34,23 +41,18 @@ const AdminHomePage = () => {
             </Link>
           </li>
           <li className="mb-4">
-            <Link to="/dashboard/add-learning-path" className="hover:text-blue-300">
-              Add Learning Path
-            </Link>
-          </li>
-          <li className="mb-4">
             <Link to="/dashboard/view-courses" className="hover:text-blue-300">
               View Courses
             </Link>
           </li>
           <li className="mb-4">
-            <Link to="/dashboard/issue-certification" className="hover:text-blue-300">
-              Issue Certificate
+            <Link to="/dashboard/employee-performance" className="hover:text-blue-300">
+              Employee Performance
             </Link>
           </li>
           <li className="mb-4">
-            <Link to="/dashboard/employee-performance" className="hover:text-blue-300">
-              Employee Performance
+            <Link to="/dashboard/issue-certification" className="hover:text-blue-300">
+              Issue Certificate
             </Link>
           </li>
         </ul>
@@ -65,6 +67,18 @@ const AdminHomePage = () => {
 
       {/* Main content */}
       <div className="flex-1 ml-64 p-10">
+        {/* Profile Section */}
+        <div className="absolute top-5 right-5 text-center">
+          <div className="flex flex-col items-center">
+            <img
+              src={imgUrl} // Placeholder image
+              alt="Profile"
+              className="rounded-full w-12 h-12 mb-2"
+            />
+            <p className="text-black font-semibold">{'Admin'}</p>
+          </div>
+        </div>
+
         <h2 className="text-3xl font-bold">Welcome to the Course Management System</h2>
         
         {/* Outlet for nested routes */}

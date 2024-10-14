@@ -39,7 +39,6 @@ const signup = async (req, res) => {
   }
 };
 
-module.exports = { signup };
 // Login handler
 const login = async (req, res) => {
   const { email, password } = req.body;
@@ -58,7 +57,7 @@ const login = async (req, res) => {
       req.session.userId = user.id; // Store user ID in session
 
       // Send token, role, and userId back in the response
-      return res.json({ token, role: user.role, userId: user.id });
+      return res.json({ token, role: user.role, userId: user.id, userName:user.name });
     }
 
     res.status(401).json({ error: 'Invalid email or password' });

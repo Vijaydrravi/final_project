@@ -49,8 +49,22 @@ exports.getCourses = async (req, res) => {
       orderBy: {
         id: 'asc', // Change this to 'desc' if you want descending order
       },
+      include: {
+        courseAssignments: {
+          select: {
+            id: true, // Include the id or any other field if necessary
+          },
+        },
+      },
     });
-    res.json(courses);
+
+    // Map through courses to include the count of enrolled members
+    const coursesWithEnrollmentCount = courses.map(course => ({
+      ...course,
+      enrolledMembers: course.courseAssignments.length, // Count the number of assignments to get enrolled members
+    }));
+
+    res.json(coursesWithEnrollmentCount);
   } catch (error) {
     console.error('Error fetching courses:', error);
     res.status(500).json({ error: 'An error occurred while fetching the courses.' });
@@ -58,40 +72,27 @@ exports.getCourses = async (req, res) => {
 };
 
 
+
 exports.editCourse = async (req, res) => {
   const { id } = req.params;
   const { title, duration, difficulty_level } = req.body;
- console.log(req.params)
+
+  console.log('ID:', id);
+  console.log('Request Body:', req.body);
+
   try {
-    // Check if the course exists
-    const courseExists = await prisma.course.findUnique({
-      where: { id: parseInt(id) }, // Ensure ID is an integer
-    });
-
-    if (!courseExists) {
-      return res.status(404).json({ error: 'Course not found' });
-    }
-
-    // Convert duration to an integer
-    const durationInt = parseInt(duration, 10);
-
-    // Check if duration is a valid positive integer
-    if (!Number.isInteger(durationInt) || durationInt <= 0) {
-      return res.status(400).json({ error: 'Invalid duration provided' });
-    }
-
     const updatedCourse = await prisma.course.update({
-      where: { id: parseInt(id) }, // Ensure ID is an integer
+      where: { id: Number(id) },
       data: {
         title,
-        duration: durationInt, // Use the converted integer duration
+        duration: parseInt(duration), // Ensure duration is an integer
         difficulty_level,
       },
     });
-
     res.json(updatedCourse);
   } catch (error) {
-    console.error('Error updating course:', error);
-    res.status(500).json({ error: 'Failed to update course' });
+    console.error('Error:', error); // Log the exact error
+    res.status(500).json({ message: 'Error updating the course', error });
   }
 };
+

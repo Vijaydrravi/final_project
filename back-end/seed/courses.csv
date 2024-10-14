@@ -1,201 +1,201 @@
 id,title,duration,difficulty_level
-1,HTML & CSS,30,Intermediate
-2,JavaScript Basics,30,Intermediate
-3,React,30,Intermediate
-4,Node.js,30,Intermediate
-5,Express.js,30,Intermediate
-6,MongoDB,30,Intermediate
-7,Git & GitHub,30,Intermediate
-8,API Development,30,Intermediate
-9,RESTful Services,30,Intermediate
-10,Deployment & Hosting,30,Intermediate
-11,Python for Data Science,30,Intermediate
-12,Data Analysis with Pandas,30,Intermediate
-13,Data Visualization with Matplotlib,30,Intermediate
-14,Machine Learning Basics,30,Intermediate
-15,Deep Learning with TensorFlow,30,Intermediate
-16,Natural Language Processing,30,Intermediate
-17,Data Cleaning & Preprocessing,30,Intermediate
-18,Statistical Analysis,30,Intermediate
-19,Big Data with Spark,30,Intermediate
-20,Data Ethics,30,Intermediate
-21,Introduction to Machine Learning,30,Intermediate
-22,Supervised Learning,30,Intermediate
-23,Unsupervised Learning,30,Intermediate
-24,Model Evaluation,30,Intermediate
-25,Deep Learning Fundamentals,30,Intermediate
-26,Natural Language Processing Techniques,30,Intermediate
-27,Computer Vision Basics,30,Intermediate
-28,Reinforcement Learning,30,Intermediate
-29,Time Series Analysis,30,Intermediate
-30,Deployment of ML Models,30,Intermediate
-31,Network Security Fundamentals,30,Intermediate
-32,Ethical Hacking Basics,30,Intermediate
-33,Web Application Security,30,Intermediate
-34,Incident Response,30,Intermediate
-35,Cryptography Basics,30,Intermediate
-36,Security in Cloud Computing,30,Intermediate
-37,Penetration Testing,30,Intermediate
-38,Malware Analysis,30,Intermediate
-39,Vulnerability Assessment,30,Intermediate
-40,Risk Management in Cybersecurity,30,Intermediate
-41,Introduction to Cloud Computing,30,Intermediate
-42,AWS Fundamentals,30,Intermediate
-43,Azure Basics,30,Intermediate
-44,Google Cloud Platform Essentials,30,Intermediate
-45,Cloud Security Best Practices,30,Intermediate
-46,DevOps in the Cloud,30,Intermediate
-47,Serverless Architecture,30,Intermediate
-48,Microservices in Cloud,30,Intermediate
-49,Containerization with Docker,30,Intermediate
-50,Cloud Cost Management,30,Intermediate
-51,iOS Development Basics,30,Intermediate
-52,Android Development Basics,30,Intermediate
-53,Cross-Platform Development with Flutter,30,Intermediate
-54,User Interface Design for Mobile Apps,30,Intermediate
-55,Mobile App Security,30,Intermediate
-56,App Monetization Strategies,30,Intermediate
-57,Performance Optimization for Mobile Apps,30,Intermediate
-58,API Integration in Mobile Apps,30,Intermediate
-59,Mobile Testing Strategies,30,Intermediate
-60,Publishing Mobile Apps,30,Intermediate
-61,Introduction to DevOps,30,Intermediate
-62,Continuous Integration and Delivery,30,Intermediate
-63,Infrastructure as Code,30,Intermediate
-64,Container Orchestration with Kubernetes,30,Intermediate
-65,Monitoring and Logging,30,Intermediate
-66,Automating Cloud Deployments,30,Intermediate
-67,Configuration Management with Ansible,30,Intermediate
-68,Version Control with Git,30,Intermediate
-69,Agile Methodologies,30,Intermediate
-70,Collaboration Tools in DevOps,30,Intermediate
-71,Frontend Development Basics,30,Intermediate
-72,Backend Development Fundamentals,30,Intermediate
-73,Responsive Web Design,30,Intermediate
-74,JavaScript Frameworks Overview,30,Intermediate
-75,Web Performance Optimization,30,Intermediate
-76,SEO Best Practices,30,Intermediate
-77,Web Accessibility Standards,30,Intermediate
-78,Content Management Systems (CMS),30,Intermediate
-79,E-commerce Development Basics,30,Intermediate
-80,Progressive Web Apps (PWAs),30,Intermediate
-81,Introduction to Game Development,30,Intermediate
-82,Game Design Principles,30,Intermediate
-83,Unity Basics,30,Intermediate
-84,Unreal Engine Basics,30,Intermediate
-85,2D Game Development,30,Intermediate
-86,3D Game Development,30,Intermediate
-87,Game Monetization Strategies,30,Intermediate
-88,Multiplayer Game Development,30,Intermediate
-89,Game Testing Techniques,30,Intermediate
-90,Virtual Reality Development,30,Intermediate
-91,SEO Fundamentals,30,Intermediate
-92,Social Media Marketing,30,Intermediate
-93,Content Marketing Strategies,30,Intermediate
-94,Email Marketing Basics,30,Intermediate
-95,Google Ads Fundamentals,30,Intermediate
-96,Analytics for Marketers,30,Intermediate
-97,Conversion Rate Optimization,30,Intermediate
-98,Influencer Marketing,30,Intermediate
-99,Affiliate Marketing,30,Intermediate
-100,Brand Management Online,30,Intermediate
-101,Introduction to Blockchain,30,Intermediate
-102,Smart Contracts Development,30,Intermediate
-103,Cryptocurrency Fundamentals,30,Intermediate
-104,Blockchain Security,30,Intermediate
-105,Ethereum Development,30,Intermediate
-106,Decentralized Applications (DApps),30,Intermediate
-107,Tokenomics,30,Intermediate
-108,Hyperledger Basics,30,Intermediate
-109,Consensus Algorithms,30,Intermediate
-110,Blockchain Use Cases,30,Intermediate
-111,Introduction to AI,30,Intermediate
-112,AI in Robotics,30,Intermediate
-113,Computer Vision Applications,30,Intermediate
-114,Speech Recognition Technologies,30,Intermediate
-115,Ethics in AI,30,Intermediate
-116,AI in Healthcare,30,Intermediate
-117,Predictive Analytics,30,Intermediate
-118,Reinforcement Learning Techniques,30,Intermediate
-119,AI for Business,30,Intermediate
-120,AI in IoT,30,Intermediate
-121,Introduction to UI/UX Design,30,Intermediate
-122,User Research Techniques,30,Intermediate
-123,Wireframing and Prototyping,30,Intermediate
-124,Usability Testing,30,Intermediate
-125,Interaction Design Principles,30,Intermediate
-126,Visual Design Basics,30,Intermediate
-127,Responsive Design Principles,30,Intermediate
-128,Design Thinking Process,30,Intermediate
-129,Mobile App Design,30,Intermediate
-130,Design Tools Overview,30,Intermediate
-131,Introduction to IT Support,30,Intermediate
-132,Networking Basics,30,Intermediate
-133,Troubleshooting Techniques,30,Intermediate
-134,Operating Systems Overview,30,Intermediate
-135,Customer Service Skills for IT,30,Intermediate
-136,Hardware Repair Skills,30,Intermediate
-137,Cloud Support Fundamentals,30,Intermediate
-138,Security Awareness for IT Support,30,Intermediate
-139,Remote Support Techniques,30,Intermediate
-140,ITIL Foundations,30,Intermediate
-141,Project Management Basics,30,Intermediate
-142,Agile Project Management,30,Intermediate
-143,Risk Management in Projects,30,Intermediate
-144,Project Scheduling Techniques,30,Intermediate
-145,Budgeting for Projects,30,Intermediate
-146,Stakeholder Management,30,Intermediate
-147,Quality Management,30,Intermediate
-148,Communication Skills for Project Managers,30,Intermediate
-149,Change Management,30,Intermediate
-150,Project Management Tools Overview,30,Intermediate
-151,Sales Fundamentals,30,Intermediate
-152,Building Customer Relationships,30,Intermediate
-153,Negotiation Techniques,30,Intermediate
-154,Closing Sales Strategies,30,Intermediate
-155,Sales Analytics,30,Intermediate
-156,Digital Sales Techniques,30,Intermediate
-157,Customer Service Excellence,30,Intermediate
-158,Presentation Skills for Sales,30,Intermediate
-159,Time Management for Sales,30,Intermediate
-160,Understanding Consumer Behavior,30,Intermediate
-161,Introduction to Business Analysis,30,Intermediate
-162,Requirements Gathering Techniques,30,Intermediate
-163,Business Process Modeling,30,Intermediate
-164,Stakeholder Analysis,30,Intermediate
-165,SWOT Analysis for Business,30,Intermediate
-166,Data Analysis for Business Decisions,30,Intermediate
-167,Change Management Strategies,30,Intermediate
-168,Risk Analysis and Management,30,Intermediate
-169,Business Case Development,30,Intermediate
-170,Presentation Skills for Business Analysts,30,Intermediate
-171,Introduction to Human Resources,30,Intermediate
-172,Talent Acquisition Strategies,30,Intermediate
-173,Employee Engagement Techniques,30,Intermediate
-174,Performance Management Systems,30,Intermediate
-175,HR Analytics,30,Intermediate
-176,Labor Laws and Compliance,30,Intermediate
-177,Training and Development,30,Intermediate
-178,Diversity and Inclusion Initiatives,30,Intermediate
-179,Conflict Resolution in HR,30,Intermediate
-180,HR Technology Tools,30,Intermediate
-181,Introduction to Finance,30,Intermediate
-182,Financial Analysis Techniques,30,Intermediate
-183,Budgeting Basics,30,Intermediate
-184,Investing Fundamentals,30,Intermediate
-185,Risk Management in Finance,30,Intermediate
-186,Financial Reporting Standards,30,Intermediate
-187,Corporate Finance Essentials,30,Intermediate
-188,Personal Finance Skills,30,Intermediate
-189,Understanding Financial Markets,30,Intermediate
-190,Financial Planning and Forecasting,30,Intermediate
-191,Introduction to Content Creation,30,Intermediate
-192,Video Production Basics,30,Intermediate
-193,Podcasting Fundamentals,30,Intermediate
-194,Blogging for Beginners,30,Intermediate
-195,Content Strategy Development,30,Intermediate
-196,SEO for Content Creators,30,Intermediate
-197,Social Media Content Creation,30,Intermediate
-198,Graphic Design Basics for Content,30,Intermediate
-199,Editing and Proofreading Techniques,30,Intermediate
-200,Content Promotion Strategies,30,Intermediate
+1,HTML & CSS,7,Intermediate
+2,JavaScript Basics,11,Intermediate
+3,React,19,Intermediate
+4,Node.js,17,Advanced
+5,Express.js,15,Advanced
+6,MongoDB,7,Beginner
+7,Git & GitHub,7,Beginner
+8,API Development,12,Beginner
+9,RESTful Services,18,Advanced
+10,Deployment & Hosting,19,Beginner
+11,Python for Data Science,8,Advanced
+12,Data Analysis with Pandas,11,Advanced
+13,Data Visualization with Matplotlib,14,Beginner
+14,Machine Learning Basics,17,Beginner
+15,Deep Learning with TensorFlow,8,Advanced
+16,Natural Language Processing,6,Advanced
+17,Data Cleaning & Preprocessing,18,Intermediate
+18,Statistical Analysis,18,Advanced
+19,Big Data with Spark,6,Advanced
+20,Data Ethics,14,Beginner
+21,Introduction to Machine Learning,6,Beginner
+22,Supervised Learning,12,Beginner
+23,Unsupervised Learning,12,Beginner
+24,Model Evaluation,19,Intermediate
+25,Deep Learning Fundamentals,9,Advanced
+26,Natural Language Processing Techniques,17,Beginner
+27,Computer Vision Basics,18,Beginner
+28,Reinforcement Learning,15,Advanced
+29,Time Series Analysis,19,Intermediate
+30,Deployment of ML Models,6,Advanced
+31,Network Security Fundamentals,20,Beginner
+32,Ethical Hacking Basics,16,Advanced
+33,Web Application Security,18,Intermediate
+34,Incident Response,16,Beginner
+35,Cryptography Basics,13,Beginner
+36,Security in Cloud Computing,17,Intermediate
+37,Penetration Testing,6,Intermediate
+38,Malware Analysis,15,Advanced
+39,Vulnerability Assessment,9,Intermediate
+40,Risk Management in Cybersecurity,16,Beginner
+41,Introduction to Cloud Computing,6,Beginner
+42,AWS Fundamentals,6,Advanced
+43,Azure Basics,16,Advanced
+44,Google Cloud Platform Essentials,19,Beginner
+45,Cloud Security Best Practices,6,Intermediate
+46,DevOps in the Cloud,13,Intermediate
+47,Serverless Architecture,17,Beginner
+48,Microservices in Cloud,15,Advanced
+49,Containerization with Docker,14,Intermediate
+50,Cloud Cost Management,9,Beginner
+51,iOS Development Basics,17,Intermediate
+52,Android Development Basics,12,Advanced
+53,Cross-Platform Development with Flutter,14,Intermediate
+54,User Interface Design for Mobile Apps,16,Intermediate
+55,Mobile App Security,8,Beginner
+56,App Monetization Strategies,15,Intermediate
+57,Performance Optimization for Mobile Apps,18,Advanced
+58,API Integration in Mobile Apps,12,Intermediate
+59,Mobile Testing Strategies,7,Beginner
+60,Publishing Mobile Apps,10,Beginner
+61,Introduction to DevOps,17,Advanced
+62,Continuous Integration and Delivery,6,Beginner
+63,Infrastructure as Code,20,Beginner
+64,Container Orchestration with Kubernetes,9,Intermediate
+65,Monitoring and Logging,10,Beginner
+66,Automating Cloud Deployments,9,Advanced
+67,Configuration Management with Ansible,14,Intermediate
+68,Version Control with Git,11,Beginner
+69,Agile Methodologies,20,Advanced
+70,Collaboration Tools in DevOps,17,Beginner
+71,Frontend Development Basics,8,Intermediate
+72,Backend Development Fundamentals,14,Beginner
+73,Responsive Web Design,10,Beginner
+74,JavaScript Frameworks Overview,11,Intermediate
+75,Web Performance Optimization,9,Intermediate
+76,SEO Best Practices,18,Intermediate
+77,Web Accessibility Standards,14,Intermediate
+78,Content Management Systems (CMS),9,Intermediate
+79,E-commerce Development Basics,19,Beginner
+80,Progressive Web Apps (PWAs),6,Advanced
+81,Introduction to Game Development,8,Advanced
+82,Game Design Principles,11,Beginner
+83,Unity Basics,18,Advanced
+84,Unreal Engine Basics,20,Intermediate
+85,2D Game Development,18,Beginner
+86,3D Game Development,15,Intermediate
+87,Game Monetization Strategies,9,Intermediate
+88,Multiplayer Game Development,10,Beginner
+89,Game Testing Techniques,16,Beginner
+90,Virtual Reality Development,10,Advanced
+91,SEO Fundamentals,11,Intermediate
+92,Social Media Marketing,15,Advanced
+93,Content Marketing Strategies,19,Beginner
+94,Email Marketing Basics,20,Beginner
+95,Google Ads Fundamentals,14,Intermediate
+96,Analytics for Marketers,17,Advanced
+97,Conversion Rate Optimization,14,Advanced
+98,Influencer Marketing,14,Advanced
+99,Affiliate Marketing,11,Intermediate
+100,Brand Management Online,16,Beginner
+101,Introduction to Blockchain,17,Advanced
+102,Smart Contracts Development,7,Intermediate
+103,Cryptocurrency Fundamentals,6,Intermediate
+104,Blockchain Security,6,Advanced
+105,Ethereum Development,10,Advanced
+106,Decentralized Applications (DApps),7,Beginner
+107,Tokenomics,19,Advanced
+108,Hyperledger Basics,8,Advanced
+109,Consensus Algorithms,20,Beginner
+110,Blockchain Use Cases,12,Intermediate
+111,Introduction to AI,14,Intermediate
+112,AI in Robotics,16,Advanced
+113,Computer Vision Applications,19,Intermediate
+114,Speech Recognition Technologies,12,Beginner
+115,Ethics in AI,6,Beginner
+116,AI in Healthcare,18,Advanced
+117,Predictive Analytics,14,Advanced
+118,Reinforcement Learning Techniques,11,Advanced
+119,AI for Business,9,Beginner
+120,AI in IoT,15,Intermediate
+121,Introduction to UI/UX Design,8,Intermediate
+122,User Research Techniques,8,Beginner
+123,Wireframing and Prototyping,16,Intermediate
+124,Usability Testing,12,Beginner
+125,Interaction Design Principles,12,Beginner
+126,Visual Design Basics,20,Beginner
+127,Responsive Design Principles,15,Intermediate
+128,Design Thinking Process,11,Beginner
+129,Mobile App Design,10,Beginner
+130,Design Tools Overview,17,Advanced
+131,Introduction to IT Support,18,Intermediate
+132,Networking Basics,15,Beginner
+133,Troubleshooting Techniques,12,Beginner
+134,Operating Systems Overview,15,Beginner
+135,Customer Service Skills for IT,6,Intermediate
+136,Hardware Repair Skills,12,Advanced
+137,Cloud Support Fundamentals,13,Beginner
+138,Security Awareness for IT Support,10,Advanced
+139,Remote Support Techniques,19,Intermediate
+140,ITIL Foundations,9,Intermediate
+141,Project Management Basics,19,Intermediate
+142,Agile Project Management,15,Advanced
+143,Risk Management in Projects,9,Beginner
+144,Project Scheduling Techniques,12,Intermediate
+145,Budgeting for Projects,10,Beginner
+146,Stakeholder Management,13,Advanced
+147,Quality Management,8,Advanced
+148,Communication Skills for Project Managers,8,Advanced
+149,Change Management,15,Intermediate
+150,Project Management Tools Overview,12,Advanced
+151,Sales Fundamentals,7,Beginner
+152,Building Customer Relationships,6,Intermediate
+153,Negotiation Techniques,15,Intermediate
+154,Closing Sales Strategies,8,Beginner
+155,Sales Analytics,20,Advanced
+156,Digital Sales Techniques,10,Beginner
+157,Customer Service Excellence,11,Intermediate
+158,Presentation Skills for Sales,11,Advanced
+159,Time Management for Sales,20,Advanced
+160,Understanding Consumer Behavior,14,Advanced
+161,Introduction to Business Analysis,15,Intermediate
+162,Requirements Gathering Techniques,20,Advanced
+163,Business Process Modeling,12,Advanced
+164,Stakeholder Analysis,7,Intermediate
+165,SWOT Analysis for Business,7,Beginner
+166,Data Analysis for Business Decisions,12,Intermediate
+167,Change Management Strategies,15,Beginner
+168,Risk Analysis and Management,12,Beginner
+169,Business Case Development,8,Intermediate
+170,Presentation Skills for Business Analysts,7,Intermediate
+171,Introduction to Human Resources,9,Beginner
+172,Talent Acquisition Strategies,15,Advanced
+173,Employee Engagement Techniques,13,Intermediate
+174,Performance Management Systems,17,Intermediate
+175,HR Analytics,13,Beginner
+176,Labor Laws and Compliance,15,Beginner
+177,Training and Development,9,Beginner
+178,Diversity and Inclusion Initiatives,17,Intermediate
+179,Conflict Resolution in HR,16,Beginner
+180,HR Technology Tools,14,Intermediate
+181,Introduction to Finance,15,Intermediate
+182,Financial Analysis Techniques,16,Intermediate
+183,Budgeting Basics,17,Intermediate
+184,Investing Fundamentals,15,Beginner
+185,Risk Management in Finance,9,Beginner
+186,Financial Reporting Standards,16,Intermediate
+187,Corporate Finance Essentials,15,Beginner
+188,Personal Finance Skills,17,Beginner
+189,Understanding Financial Markets,15,Intermediate
+190,Financial Planning and Forecasting,7,Intermediate
+191,Introduction to Content Creation,17,Intermediate
+192,Video Production Basics,19,Advanced
+193,Podcasting Fundamentals,15,Beginner
+194,Blogging for Beginners,17,Intermediate
+195,Content Strategy Development,19,Advanced
+196,SEO for Content Creators,9,Beginner
+197,Social Media Content Creation,14,Intermediate
+198,Graphic Design Basics for Content,14,Advanced
+199,Editing and Proofreading Techniques,12,Intermediate
+200,Content Promotion Strategies,16,Advanced

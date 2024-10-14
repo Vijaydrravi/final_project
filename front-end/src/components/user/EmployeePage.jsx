@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import profileAdminImg from '../../assets/account.png';
 
 const EmployeePage = () => {
-  const { logout, user } = useAuth(); // Assuming `user` contains user details
+  const { logout, userName } = useAuth(); // Assuming `user` contains user details
   const navigate = useNavigate();
   const imgUrl = profileAdminImg;
 
@@ -50,6 +50,11 @@ const EmployeePage = () => {
               My Certification
             </Link>
           </li>
+          <li className="mb-4">
+            <Link to="/employee-home/suggested-path" className="hover:text-blue-300">
+              Suggested Path
+            </Link>
+          </li>
         </ul>
         {/* Logout Button */}
         <button
@@ -71,7 +76,8 @@ const EmployeePage = () => {
               alt="Profile"
               className="rounded-full w-12 h-12 mb-2"
             />
-            <p className="text-black font-semibold">{user?.name || 'User Name'}</p>
+            <p className="text-black font-semibold">{userName || 'User Name'}</p>
+            {/* <p>{user}</p> */}
           </div>
         </div>
 

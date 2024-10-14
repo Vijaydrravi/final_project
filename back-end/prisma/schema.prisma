@@ -26,6 +26,7 @@ model User {
   performanceRatings PerformanceRating[]   
   performanceSummary PerformanceSummary[]   
   certificates       Certificates[]        
+  suggestedLearningPaths SuggestedLearningPath[] // Relation to suggested learning paths
 }
 
 model Course {
@@ -90,6 +91,7 @@ model LearningPath {
   created_at       DateTime             @default(now())
   courses          CourseLearningPath[]  // Many-to-many relationship with courses
   performanceSummaries PerformanceSummary[] // Relation to performance summaries
+    suggestedLearningPaths SuggestedLearningPath[] // Relation to suggested learning paths
 }
 
 model CourseLearningPath {
@@ -100,4 +102,16 @@ model CourseLearningPath {
   learningPath      LearningPath @relation(fields: [learning_path_id], references: [id], onDelete: Cascade)
 
   @@unique([course_id, learning_path_id]) // Ensure unique pairings
+}
+
+model SuggestedLearningPath {
+  id               Int   @id @default(autoincrement())
+  user_id          Int
+  learning_path_id Int
+
+  // Relations
+  user             User              @relation(fields: [user_id], references: [id])
+  learningPath     LearningPath      @relation(fields: [learning_path_id], references: [id])
+
+  @@unique([user_id, learning_path_id]) // Ensures that each user can have a unique recommendation for each learning path
 }

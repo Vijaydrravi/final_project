@@ -74,7 +74,7 @@ const AddCourse = () => {
 
   return (
     <div>
-      <h1 className="text-3xl font-bold">Add Course</h1>
+      <h1 className="text-2xl font-bold text-center mt-10 mb-5">Add Course</h1>
       <form onSubmit={handleSubmit}>
         <div>
           <label className="block mb-2">Course Title</label>

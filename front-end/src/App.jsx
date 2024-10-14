@@ -8,7 +8,7 @@ import EmployeePage from './components/user/EmployeePage'; // Import Employee Ho
 import AddCourse from './components/Admin/AddCourse';
 import AssignCourse from './components/Admin/AssignCourse';
 import AddLearningPath from './components/Admin/AddLearningPath';
-import ViewCourses from './components/admin/ViewCourses';
+import ViewCourses from './components/Admin/ViewCourses';
 import EnrolledCourses from './components/user/EnrolledCourses'; // Import Enrolled Courses component
 import LearningPathTable from './components/user/LearningPathTable';
 import MyPerformance from './components/user/MyPerformance';
@@ -18,7 +18,7 @@ import EmployeeDashboard from './components/user/EmployeeDashboard';
 import EmployeeTable from './components/Admin/EmployeeTable';
 import EmployeeProfile from './components/Admin/EmployeeProfile';
 import AdminDashboard from './components/Admin/AdminDashboard';
-
+import SuggestedLearningPath from './components/user/SuggestedLearningPath';
 
 const ProtectedRoute = ({ children }) => {
   const { token } = useAuth();
@@ -54,6 +54,7 @@ const App = () => {
             <Route path="performance-learningpaths"   element={<LearningPathTable />} />
             <Route path="my-certification"   element={<MyCertification />} />
             <Route path="dashboard"   element={<EmployeeDashboard />} />
+            <Route path="suggested-path"   element={<SuggestedLearningPath />} />
           </Route>
 
           {/* Admin Routes */}

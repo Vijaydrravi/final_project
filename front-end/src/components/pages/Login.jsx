@@ -22,7 +22,7 @@ const Login = () => {
 
       const data = await response.json();
       if (response.ok) {
-        login(data.token, data.role, data.userId); // Include userId
+        login(data.token, data.role, data.userId, data.userName); // Include userId
 
         toast.success('Login successful! Redirecting to dashboard...');
 

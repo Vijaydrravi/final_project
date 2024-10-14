@@ -126,3 +126,49 @@ exports.assignCourse = async (req, res) => {
     res.status(500).json({ error: 'Failed to assign course' });
   }
 };
+
+
+exports.getAvailableCourses = async (req, res) => {
+  const userId = parseInt(req.params.userId);
+
+  try {
+    // Step 1: Get the suggested learning paths for the user
+    const suggestedLearningPaths = await prisma.suggestedLearningPath.findMany({
+      where: { user_id: userId },
+      select: { learning_path_id: true },
+    });
+
+    const suggestedLearningPathIds = suggestedLearningPaths.map(path => path.learning_path_id);
+
+    // Step 2: Fetch all courses associated with the suggested learning paths
+    const coursesFromSuggestedPaths = await prisma.courseLearningPath.findMany({
+      where: { learning_path_id: { in: suggestedLearningPathIds } },
+      select: { course_id: true },
+    });
+
+    const suggestedCourseIds = coursesFromSuggestedPaths.map(course => course.course_id);
+
+    // Step 3: Get courses that are already assigned to the user
+    const enrolledCourses = await prisma.courseAssignment.findMany({
+      where: { user_id: userId },
+      select: { course_id: true },
+    });
+
+    const enrolledCourseIds = enrolledCourses.map(course => course.course_id);
+
+    // Step 4: Fetch courses from the suggested learning paths that the user is not enrolled in
+    const availableCourses = await prisma.course.findMany({
+      where: {
+        id: { in: suggestedCourseIds },
+        NOT: {
+          id: { in: enrolledCourseIds },
+        },
+      },
+    });
+
+    res.json(availableCourses);
+  } catch (error) {
+    console.error('Error fetching available courses:', error);
+    res.status(500).json({ error: 'Failed to fetch available courses.' });
+  }
+};

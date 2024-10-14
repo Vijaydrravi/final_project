@@ -51,7 +51,7 @@ const EmployeeTable = () => {
 
     return (
         <div className="overflow-x-auto mt-4">
-            <h1 className="text-xl font-bold mb-4">Employee Performance</h1>
+            <h1 className="text-xl font-bold  text-center mt-10 mb-5">Employee Performance</h1>
             <div className="mb-4">
                 <label htmlFor="employeesPerPage" className="mr-2">Show:</label>
                 <select 

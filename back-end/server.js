@@ -44,9 +44,6 @@ app.use('/api/dashboard',dashboardRoutes)
 app.use('/api/employee',employeeRoutes)
 app.use('/api/admin-dashboard',adminDashboardRoutes)
 
-// app.js
-
-
 
 // Start server
 app.listen(PORT, () => {

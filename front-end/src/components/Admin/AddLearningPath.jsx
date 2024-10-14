@@ -112,7 +112,7 @@ const AddLearningPath = () => {
 
   return (
     <div className="mt-10">
-      <h2 className="text-2xl font-bold mb-4">{editingId ? 'Edit' : 'Add'} Learning Path</h2>
+      <h2 className="text-2xl font-bold  text-center mt-10 mb-5">{editingId ? 'Edit' : 'Add'} Learning Path</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className='grid '>
           <label className="block mb-2" htmlFor="title">Title</label>
