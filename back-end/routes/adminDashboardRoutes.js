@@ -1,16 +1,12 @@
 const express = require('express');
-const {
-  getDashboardStats,
-  getLearningPathPerformance,
-  getCourseProgressDistribution,
-  getCourseScores,
-} = require('../controllers/adminDashboardController');
+const { getDashboardStats, getLearningPathPerformance } = require('../controllers/adminDashboardController');
 
 const router = express.Router();
 
+// Route to fetch dashboard statistics
 router.get('/dashboard-stats', getDashboardStats);
+
+// Route to fetch learning path performance data
 router.get('/learning-path-performance', getLearningPathPerformance);
-router.get('/course-progress-distribution', getCourseProgressDistribution);
-router.get('/course-scores', getCourseScores);
 
 module.exports = router;

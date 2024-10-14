@@ -169,6 +169,6 @@ exports.getAvailableCourses = async (req, res) => {
     res.json(availableCourses);
   } catch (error) {
     console.error('Error fetching available courses:', error);
-    res.status(500).json({ error: 'Failed to fetch available courses.' });
+    res.status(500).json({ error: 'Failed to fetch available courses hey.' });
   }
 };
