@@ -1,0 +1,201 @@
+Course Title,Total Enrolled,Total Certified
+Data Ethics,980,681
+Data Cleaning & Preprocessing,976,666
+Data Analysis for Business Decisions,975,661
+Data Visualization with Matplotlib,973,672
+Data Analysis with Pandas,970,649
+Video Production Basics,60,45
+3D Game Development,57,36
+Introduction to Blockchain,55,31
+API Integration in Mobile Apps,54,37
+Natural Language Processing,53,37
+Container Orchestration with Kubernetes,51,33
+Agile Methodologies,50,42
+Google Ads Fundamentals,49,35
+Graphic Design Basics for Content,49,33
+Responsive Design Principles,48,26
+Budgeting Basics,48,32
+Reinforcement Learning Techniques,47,30
+Hyperledger Basics,47,34
+Design Thinking Process,47,35
+AI in Healthcare,46,33
+Azure Basics,46,32
+Wireframing and Prototyping,46,35
+MongoDB,46,25
+Big Data with Spark,46,33
+Multiplayer Game Development,46,30
+Introduction to Human Resources,46,33
+Introduction to DevOps,46,31
+Progressive Web Apps (PWAs),46,28
+SEO Best Practices,46,31
+Node.js,46,34
+Negotiation Techniques,45,33
+Remote Support Techniques,45,33
+AWS Fundamentals,45,25
+Supervised Learning,45,27
+Sales Fundamentals,45,27
+Serverless Architecture,45,34
+Cloud Cost Management,45,33
+Introduction to Game Development,44,31
+Content Marketing Strategies,44,30
+Microservices in Cloud,44,33
+Presentation Skills for Sales,44,28
+Speech Recognition Technologies,44,29
+Analytics for Marketers,44,34
+Stakeholder Analysis,44,33
+Affiliate Marketing,44,35
+Introduction to Content Creation,44,29
+Vulnerability Assessment,44,29
+JavaScript Frameworks Overview,44,31
+Project Management Basics,44,31
+Game Testing Techniques,44,29
+Machine Learning Basics,44,34
+Risk Management in Projects,43,35
+Computer Vision Applications,43,27
+Game Design Principles,43,29
+Editing and Proofreading Techniques,43,28
+Natural Language Processing Techniques,43,27
+Email Marketing Basics,43,33
+Project Management Tools Overview,42,34
+Understanding Financial Markets,42,29
+Infrastructure as Code,42,31
+Cross-Platform Development with Flutter,42,31
+E-commerce Development Basics,42,32
+Labor Laws and Compliance,42,30
+Building Customer Relationships,42,34
+Ethereum Development,42,28
+iOS Development Basics,42,24
+Predictive Analytics,42,32
+Talent Acquisition Strategies,42,31
+Introduction to UI/UX Design,42,29
+Ethical Hacking Basics,42,26
+SEO for Content Creators,42,26
+Introduction to IT Support,42,25
+Deep Learning with TensorFlow,42,28
+Containerization with Docker,42,27
+Monitoring and Logging,41,33
+Visual Design Basics,41,26
+Introduction to Business Analysis,41,27
+Risk Management in Cybersecurity,41,19
+Computer Vision Basics,41,25
+Time Series Analysis,41,24
+RESTful Services,41,26
+Smart Contracts Development,41,28
+Risk Analysis and Management,40,30
+Introduction to AI,40,27
+SEO Fundamentals,40,29
+Game Monetization Strategies,40,25
+Unity Basics,40,26
+Blogging for Beginners,40,25
+AI in Robotics,40,28
+Quality Management,40,24
+Python for Data Science,40,31
+Frontend Development Basics,39,26
+AI in IoT,39,30
+Understanding Consumer Behavior,39,28
+API Development,39,30
+Personal Finance Skills,39,26
+Blockchain Security,39,31
+Introduction to Machine Learning,39,31
+Automating Cloud Deployments,39,26
+Publishing Mobile Apps,39,23
+Web Performance Optimization,39,30
+Decentralized Applications (DApps),39,27
+Mobile Testing Strategies,39,29
+Corporate Finance Essentials,39,25
+Security Awareness for IT Support,39,24
+HR Technology Tools,39,24
+Ethics in AI,39,26
+Continuous Integration and Delivery,38,28
+Malware Analysis,38,26
+Reinforcement Learning,38,29
+Training and Development,38,23
+Configuration Management with Ansible,38,26
+Deployment & Hosting,38,26
+Performance Optimization for Mobile Apps,38,22
+Risk Management in Finance,38,28
+Financial Analysis Techniques,38,24
+Unsupervised Learning,38,24
+Git & GitHub,38,27
+HR Analytics,38,27
+Incident Response,38,29
+Backend Development Fundamentals,38,22
+Requirements Gathering Techniques,38,28
+Business Case Development,37,23
+Virtual Reality Development,37,26
+Stakeholder Management,37,22
+Closing Sales Strategies,37,25
+Mobile App Security,37,22
+Podcasting Fundamentals,37,27
+Presentation Skills for Business Analysts,37,27
+Digital Sales Techniques,37,26
+Unreal Engine Basics,37,21
+2D Game Development,37,23
+Model Evaluation,37,31
+Employee Engagement Techniques,37,26
+Web Application Security,37,22
+Troubleshooting Techniques,37,28
+Consensus Algorithms,37,24
+Diversity and Inclusion Initiatives,36,25
+Operating Systems Overview,36,21
+Content Promotion Strategies,36,26
+Brand Management Online,36,23
+Android Development Basics,36,26
+Security in Cloud Computing,36,23
+Responsive Web Design,36,21
+Deployment of ML Models,36,22
+Sales Analytics,36,23
+User Research Techniques,36,24
+Cryptocurrency Fundamentals,36,23
+Statistical Analysis,36,20
+ITIL Foundations,36,25
+Mobile App Design,36,23
+Introduction to Cloud Computing,36,26
+Budgeting for Projects,36,25
+Cloud Support Fundamentals,36,27
+Google Cloud Platform Essentials,36,22
+Project Scheduling Techniques,36,27
+Social Media Marketing,36,20
+DevOps in the Cloud,35,25
+Blockchain Use Cases,35,25
+Introduction to Finance,35,27
+Social Media Content Creation,35,26
+React,35,24
+Business Process Modeling,35,22
+App Monetization Strategies,34,22
+Communication Skills for Project Managers,34,30
+Change Management,34,26
+Customer Service Excellence,33,22
+Collaboration Tools in DevOps,33,21
+Version Control with Git,33,26
+Content Strategy Development,33,19
+Financial Planning and Forecasting,33,22
+Customer Service Skills for IT,33,21
+Usability Testing,33,23
+Conflict Resolution in HR,33,23
+Networking Basics,33,22
+User Interface Design for Mobile Apps,33,22
+Design Tools Overview,33,21
+HTML & CSS,33,20
+Investing Fundamentals,32,22
+Performance Management Systems,32,21
+Penetration Testing,32,24
+Web Accessibility Standards,32,22
+JavaScript Basics,32,18
+Time Management for Sales,31,24
+SWOT Analysis for Business,31,22
+Change Management Strategies,31,20
+Network Security Fundamentals,30,22
+Cloud Security Best Practices,30,24
+Conversion Rate Optimization,30,23
+Tokenomics,30,21
+Hardware Repair Skills,30,19
+AI for Business,30,16
+Agile Project Management,30,21
+Express.js,29,20
+Interaction Design Principles,29,19
+Cryptography Basics,28,18
+Content Management Systems (CMS),28,20
+Influencer Marketing,27,18
+Deep Learning Fundamentals,27,21
+Financial Reporting Standards,26,20
