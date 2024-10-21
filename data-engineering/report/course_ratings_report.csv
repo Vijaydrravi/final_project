@@ -1,0 +1,201 @@
+Course Title,Average Rating
+HTML & CSS,81.28571428571429
+JavaScript Basics,81.71428571428571
+React,78.30434782608695
+Node.js,80.7
+Express.js,82.15384615384616
+MongoDB,81.9047619047619
+Git & GitHub,81.02325581395348
+API Development,78.01923076923077
+RESTful Services,79.09756097560975
+Deployment & Hosting,80.96428571428571
+Python for Data Science,81.03030303030303
+Data Analysis with Pandas,80.10499490316005
+Data Visualization with Matplotlib,79.73705583756345
+Machine Learning Basics,79.83333333333333
+Deep Learning with TensorFlow,79.26829268292683
+Natural Language Processing,80.13888888888889
+Data Cleaning & Preprocessing,80.57010309278351
+Statistical Analysis,79.81395348837209
+Big Data with Spark,78.17647058823529
+Data Ethics,79.89928057553956
+Introduction to Machine Learning,80.18367346938776
+Supervised Learning,77.80952380952381
+Unsupervised Learning,78.58333333333333
+Model Evaluation,78.83783783783784
+Deep Learning Fundamentals,81.875
+Natural Language Processing Techniques,79.62222222222222
+Computer Vision Basics,81.38095238095238
+Reinforcement Learning,82.2127659574468
+Time Series Analysis,79.74285714285715
+Deployment of ML Models,80.65714285714286
+Network Security Fundamentals,79.4390243902439
+Ethical Hacking Basics,78.51162790697674
+Web Application Security,79.76666666666667
+Incident Response,80.96774193548387
+Cryptography Basics,81.89473684210526
+Security in Cloud Computing,78.8048780487805
+Penetration Testing,78.27027027027027
+Malware Analysis,81.38461538461539
+Vulnerability Assessment,82.65789473684211
+Risk Management in Cybersecurity,82.4888888888889
+Introduction to Cloud Computing,81.15
+AWS Fundamentals,80.0625
+Azure Basics,80.4186046511628
+Google Cloud Platform Essentials,79.07317073170732
+Cloud Security Best Practices,79.625
+DevOps in the Cloud,81.56521739130434
+Serverless Architecture,82.0
+Microservices in Cloud,81.76744186046511
+Containerization with Docker,78.6923076923077
+Cloud Cost Management,80.19047619047619
+iOS Development Basics,81.55813953488372
+Android Development Basics,80.0
+Cross-Platform Development with Flutter,79.2
+User Interface Design for Mobile Apps,79.17857142857143
+Mobile App Security,78.90322580645162
+App Monetization Strategies,81.45454545454545
+Performance Optimization for Mobile Apps,80.9090909090909
+API Integration in Mobile Apps,80.08333333333333
+Mobile Testing Strategies,79.8974358974359
+Publishing Mobile Apps,78.46938775510205
+Introduction to DevOps,77.8157894736842
+Continuous Integration and Delivery,81.1842105263158
+Infrastructure as Code,78.48837209302326
+Container Orchestration with Kubernetes,78.35135135135135
+Monitoring and Logging,79.40625
+Automating Cloud Deployments,78.94444444444444
+Configuration Management with Ansible,82.26190476190476
+Version Control with Git,79.61904761904762
+Agile Methodologies,78.875
+Collaboration Tools in DevOps,82.46153846153847
+Frontend Development Basics,81.23684210526316
+Backend Development Fundamentals,80.175
+Responsive Web Design,81.37142857142857
+JavaScript Frameworks Overview,80.20833333333333
+Web Performance Optimization,77.23404255319149
+SEO Best Practices,79.87179487179488
+Web Accessibility Standards,81.1025641025641
+Content Management Systems (CMS),78.80392156862744
+E-commerce Development Basics,80.90697674418605
+Progressive Web Apps (PWAs),80.02222222222223
+Introduction to Game Development,80.78378378378379
+Game Design Principles,78.0909090909091
+Unity Basics,78.51428571428572
+Unreal Engine Basics,77.14285714285714
+2D Game Development,80.15
+3D Game Development,79.35555555555555
+Game Monetization Strategies,81.67441860465117
+Multiplayer Game Development,80.55263157894737
+Game Testing Techniques,80.38095238095238
+Virtual Reality Development,79.77272727272727
+SEO Fundamentals,81.0952380952381
+Social Media Marketing,80.87878787878788
+Content Marketing Strategies,82.88372093023256
+Email Marketing Basics,80.84210526315789
+Google Ads Fundamentals,79.44117647058823
+Analytics for Marketers,80.32432432432432
+Conversion Rate Optimization,80.87878787878788
+Influencer Marketing,79.35
+Affiliate Marketing,78.11111111111111
+Brand Management Online,80.5952380952381
+Introduction to Blockchain,78.70833333333333
+Smart Contracts Development,81.54761904761905
+Cryptocurrency Fundamentals,80.5813953488372
+Blockchain Security,78.63636363636364
+Ethereum Development,80.51428571428572
+Decentralized Applications (DApps),82.125
+Tokenomics,80.48837209302326
+Hyperledger Basics,78.54347826086956
+Consensus Algorithms,78.92307692307692
+Blockchain Use Cases,78.0576923076923
+Introduction to AI,79.0
+AI in Robotics,80.97222222222223
+Computer Vision Applications,80.54166666666667
+Speech Recognition Technologies,79.8529411764706
+Ethics in AI,81.29545454545455
+AI in Healthcare,78.57446808510639
+Predictive Analytics,81.625
+Reinforcement Learning Techniques,79.38636363636364
+AI for Business,80.15625
+AI in IoT,79.10526315789474
+Introduction to UI/UX Design,80.28571428571429
+User Research Techniques,79.4047619047619
+Wireframing and Prototyping,80.28571428571429
+Usability Testing,77.64444444444445
+Interaction Design Principles,79.1842105263158
+Visual Design Basics,79.26666666666667
+Responsive Design Principles,79.96551724137932
+Design Thinking Process,79.86842105263158
+Mobile App Design,79.82758620689656
+Design Tools Overview,80.85714285714286
+Introduction to IT Support,80.7872340425532
+Networking Basics,79.08333333333333
+Troubleshooting Techniques,82.11111111111111
+Operating Systems Overview,79.16666666666667
+Customer Service Skills for IT,82.15555555555555
+Hardware Repair Skills,80.41666666666667
+Cloud Support Fundamentals,78.8108108108108
+Security Awareness for IT Support,79.76190476190476
+Remote Support Techniques,80.83720930232558
+ITIL Foundations,81.48387096774194
+Project Management Basics,81.81818181818181
+Agile Project Management,80.3953488372093
+Risk Management in Projects,78.41463414634147
+Project Scheduling Techniques,81.38095238095238
+Budgeting for Projects,80.88095238095238
+Stakeholder Management,79.44444444444444
+Quality Management,81.65625
+Communication Skills for Project Managers,82.29787234042553
+Change Management,80.17948717948718
+Project Management Tools Overview,80.66666666666667
+Sales Fundamentals,79.11320754716981
+Building Customer Relationships,80.05263157894737
+Negotiation Techniques,79.3103448275862
+Closing Sales Strategies,77.63414634146342
+Sales Analytics,78.63414634146342
+Digital Sales Techniques,79.13636363636364
+Customer Service Excellence,79.88095238095238
+Presentation Skills for Sales,80.125
+Time Management for Sales,81.79310344827586
+Understanding Consumer Behavior,78.61904761904762
+Introduction to Business Analysis,80.71739130434783
+Requirements Gathering Techniques,81.28571428571429
+Business Process Modeling,79.54545454545455
+Stakeholder Analysis,77.82142857142857
+SWOT Analysis for Business,80.84615384615384
+Data Analysis for Business Decisions,80.36799184505607
+Change Management Strategies,78.51063829787235
+Risk Analysis and Management,80.38636363636364
+Business Case Development,78.4186046511628
+Presentation Skills for Business Analysts,79.14583333333333
+Introduction to Human Resources,81.47619047619048
+Talent Acquisition Strategies,79.69444444444444
+Employee Engagement Techniques,81.0
+Performance Management Systems,79.13953488372093
+HR Analytics,80.08823529411765
+Labor Laws and Compliance,79.4
+Training and Development,81.3529411764706
+Diversity and Inclusion Initiatives,81.87755102040816
+Conflict Resolution in HR,81.64285714285714
+HR Technology Tools,81.47169811320755
+Introduction to Finance,79.25641025641026
+Financial Analysis Techniques,80.94285714285714
+Budgeting Basics,78.4054054054054
+Investing Fundamentals,80.17142857142858
+Risk Management in Finance,81.26315789473684
+Financial Reporting Standards,79.25641025641026
+Corporate Finance Essentials,79.7948717948718
+Personal Finance Skills,79.63157894736842
+Understanding Financial Markets,82.73469387755102
+Financial Planning and Forecasting,80.15789473684211
+Introduction to Content Creation,78.32608695652173
+Video Production Basics,79.69047619047619
+Podcasting Fundamentals,78.91666666666667
+Blogging for Beginners,81.56521739130434
+Content Strategy Development,81.26190476190476
+SEO for Content Creators,81.14285714285714
+Social Media Content Creation,80.71794871794872
+Graphic Design Basics for Content,78.79411764705883
+Editing and Proofreading Techniques,81.23529411764706
+Content Promotion Strategies,80.21875

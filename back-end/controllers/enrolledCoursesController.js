@@ -11,8 +11,9 @@ async function getEnrolledCourses(req, res) {
         user_id: parseInt(userId), // Ensure user_id matches
       },
       include: {
-        course: true, // Include course details
-      },
+        course: true,
+        certificates:true // Include course details
+      }
     });
 
     res.status(200).json(enrolledCourses);
@@ -63,9 +64,9 @@ async function updateEnrolledCourse(req, res) {
         }
 
         // Check if the course is already completed
-        if (currentCourse.progress === 100) {
-            return res.status(400).json({ error: "Course is already completed, cannot update." });
-        }
+        // if (currentCourse.progress === 100) {
+        //     return res.status(400).json({ error: "Course is already completed, cannot update." });
+        // }
 
         // Update the progress and other details for the specified course assignment
         const updatedCourse = await prisma.courseAssignment.update({
