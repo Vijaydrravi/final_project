@@ -1,5 +1,5 @@
 const express = require('express');
-const { getAllEmployees, getUserProfile } = require('../controllers/employeeController'); // Adjust path accordingly
+const { getAllEmployees, getUserProfile } = require('../../controllers/admin/employeeController'); // Adjust path accordingly
 
 const router = express.Router();
 

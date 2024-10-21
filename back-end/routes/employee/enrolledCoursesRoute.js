@@ -1,5 +1,5 @@
 const express = require('express');
-const { getEnrolledCourses,updateEnrolledCourse } = require('../controllers/enrolledCoursesController');
+const { getEnrolledCourses,updateEnrolledCourse } = require('../../controllers/employee/enrolledCoursesController');
 const router = express.Router();
 
 router.get('/:userId', getEnrolledCourses);

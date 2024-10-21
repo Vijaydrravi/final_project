@@ -1,5 +1,5 @@
 const express = require('express');
-const { getLearningPaths,getPerformanceData } = require('../controllers/PerformanceController');
+const { getLearningPaths,getPerformanceData } = require('../../controllers/employee/PerformanceController');
 const router = express.Router();
 
 // Route to fetch performance data for a user

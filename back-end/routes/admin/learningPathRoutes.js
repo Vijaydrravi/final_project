@@ -4,7 +4,7 @@ const {
   createLearningPath,
   getLearningPaths,
   updateLearningPath,
-} = require('../controllers/learningPathController');
+} = require('../../controllers/admin/learningPathController');
 
 // GET all learning paths
 router.get('/', getLearningPaths);

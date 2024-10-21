@@ -3,16 +3,17 @@ const session = require('express-session');
 const bodyParser = require('body-parser');
 
 const authRoutes = require('./routes/authRoutes'); // Import the routes
-const learningPathRoutes = require('./routes/learningPathRoutes');
-const coursesRoutes = require('./routes/CourseRoute');
-const assignCourseRoutes = require('./routes/assignCourseRoutes');
-const enrolledCoursesRoute = require('./routes/enrolledCoursesRoute')
-const performanceRoutes = require('./routes/performanceRoutes')
-const learningPathPerformanceRoutes = require('./routes/learningPathPerformanceRoutes')
+const learningPathRoutes = require('./routes/admin/learningPathRoutes');
+const coursesRoutes = require('./routes/admin/CourseRoute');
+const assignCourseRoutes = require('./routes/admin/AssignCourseRoutes');
+const enrolledCoursesRoute = require('./routes/employee/enrolledCoursesRoute')
+const performanceRoutes = require('./routes/employee/performanceRoutes')
+const learningPathPerformanceRoutes = require('./routes/employee/learningPathPerformanceRoutes')
 const CertificationRoutes = require('./routes/CertificationRoutes')
-const dashboardRoutes = require('./routes/dashboardRoutes')
-const employeeRoutes = require('./routes/employeeRoutes')
-const adminDashboardRoutes = require('./routes/adminDashboardRoutes')
+const dashboardRoutes = require('./routes/employee/dashboardRoutes')
+const employeeRoutes = require('./routes/admin/employeeRoutes')
+const adminDashboardRoutes = require('./routes/admin/adminDashboardRoutes')
+require('dotenv').config()
 
 
 const app = express();
@@ -25,7 +26,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Session configuration
 app.use(session({
-  secret: 'your-secret-key',
+  secret:"Vijay",
   resave: false,
   saveUninitialized: true,
   cookie: { secure: false } // Set to true if using HTTPS

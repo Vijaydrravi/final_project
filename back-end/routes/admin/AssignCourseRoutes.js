@@ -1,5 +1,5 @@
 const express = require('express');
-const { getCoursesByLearningPath, getEmployees, assignCourse,getAvailableCourses } = require('../controllers/assignCourseController');
+const { getCoursesByLearningPath, getEmployees, assignCourse,getAvailableCourses } = require('../../controllers/admin/AssignCourseController');
 const router = express.Router();
 
 // Get courses by learning path ID

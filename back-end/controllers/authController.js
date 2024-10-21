@@ -51,7 +51,7 @@ const login = async (req, res) => {
     if (user && (await bcrypt.compare(password, user.password))) {
       const token = jwt.sign(
         { userId: user.id, role: user.role },
-        'your-jwt-secret',
+        process.env.JWT_SECRET,
         { expiresIn: '1h' }
       );
       req.session.userId = user.id; // Store user ID in session

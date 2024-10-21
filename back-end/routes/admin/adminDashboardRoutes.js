@@ -1,5 +1,5 @@
 const express = require('express');
-const { getDashboardStats, getLearningPathPerformance } = require('../controllers/adminDashboardController');
+const { getDashboardStats, getLearningPathPerformance } = require('../../controllers/admin/adminDashboardController');
 
 const router = express.Router();
 

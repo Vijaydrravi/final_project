@@ -79,7 +79,7 @@ exports.editCourse = async (req, res) => {
 
   console.log('ID:', id);
   console.log('Request Body:', req.body);
-
+  console.log("hello")
   try {
     const updatedCourse = await prisma.course.update({
       where: { id: Number(id) },

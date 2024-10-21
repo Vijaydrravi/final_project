@@ -1,7 +1,7 @@
 // routes/learningPathRoutes.js
 
 const express = require('express');
-const { getLearningPathsWithPerformance } = require('../controllers/learningPathPerformanceController');
+const { getLearningPathsWithPerformance } = require('../../controllers/employee/learningPathPerformanceController');
 
 const router = express.Router();
 
