@@ -10,8 +10,14 @@ const IssueCertification = () => {
   useEffect(() => {
     // Fetch users eligible for certification
     const fetchUsers = async () => {
+      const token = localStorage.getItem('token')
+      // console.log(token)
       try {
-        const response = await axios.get('http://localhost:5000/api/certifications/issue-certification');
+        const response = await axios.get('http://localhost:5000/api/certifications/issue-certification', {
+          headers: {
+            'Content-Type': 'application/json', 
+          }
+        });
         setUsers(response.data.users);
         setLoading(false);
       } catch (error) {

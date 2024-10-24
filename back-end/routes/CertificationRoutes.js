@@ -6,6 +6,7 @@ const {
   approveCertification,
   getCertificates
 } = require('../controllers/CertificationController');
+const verifyToken = require('../middlewares/verifyToken')
 
 // Route to get users for certification based on learning path
 router.get('/issue-certification', issueCertification);

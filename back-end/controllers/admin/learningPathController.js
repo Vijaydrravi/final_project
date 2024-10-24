@@ -36,7 +36,13 @@ const createLearningPath = async (req, res) => {
 // Function to get all learning paths
 const getLearningPaths = async (req, res) => {
   try {
-    const learningPaths = await prisma.learningPath.findMany();
+    const learningPaths = await prisma.learningPath.findMany(
+      {
+        orderBy:{
+          id:'asc'
+        }
+      }
+    );
     res.json(learningPaths);
   } catch (error) {
     console.error('Error fetching learning paths:', error);

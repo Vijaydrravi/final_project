@@ -4,7 +4,8 @@ const router = express.Router();
 const coursesController = require('../../controllers/admin/coursesController');
 const verifyToken = require('../../middlewares/verifyToken')
 
-router.get('/',verifyToken('admin'), coursesController.getCourses);
-router.post('/:id', coursesController.editCourse);
+router.get('/', coursesController.getCourses);
 
+// router.post('/:id', coursesController);
+router.post('/',coursesController.addCourse)
 module.exports = router;
